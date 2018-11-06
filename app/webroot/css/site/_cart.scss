@@ -1,0 +1,62 @@
+#cart{	
+	.coupon-form{
+		.coupon-form-elements{	
+			display: table;
+			margin: 0 auto;					
+			> *{
+				display: table-cell;
+				vertical-align: middle;		
+				width: auto;	
+			}
+			>*:first-child{
+				width: 58%;
+			}
+			>*:last-child{
+				width: 40%;
+			}
+			.button{				
+				border-top-left-radius: 0;
+				border-bottom-left-radius: 0;
+				padding: 6px 15px;
+			}
+		}
+	}
+	.button-submit{
+		padding-top: 10px;
+		padding-bottom: 10px;
+	}
+}
+
+@media(min-width: 480px){
+	#cart{	
+		.coupon-form{
+			
+			.coupon-form-elements{	
+				
+				> *{
+					
+				}
+			}
+		}
+	}
+}
+
+@media(min-width: 768px){
+	#cart{	
+		.coupon-form{
+			display: block;
+			.coupon-form-elements{	
+				&:after{
+					content: ' ';
+					display: table;
+					clear: both;
+				}
+				> *,>*:first-child,>*:last-child,{
+					float: left;
+					width: auto;					
+					display: inline-block;				
+				}
+			}
+		}
+	}
+}

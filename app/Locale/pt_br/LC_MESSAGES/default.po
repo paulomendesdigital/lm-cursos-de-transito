@@ -1,0 +1,827 @@
+msgid "Group" 
+msgstr "Grupo"
+
+msgid "new_password" 
+msgstr "Nova senha"
+
+msgid "description_certificate" 
+msgstr "Descrição no certificado"
+
+msgid "orders" 
+msgstr "Vendas"
+
+msgid "forum_post_count" 
+msgstr "Qt postagens"
+
+msgid "course_libraries" 
+msgstr "Biblioteca Virtual"
+
+msgid "user_questions" 
+msgstr "Questionário do usuário"
+
+msgid "Instructor Id" 
+msgstr "Instrutores"
+
+msgid "Related Direct Messages" 
+msgstr "Mensagens diretas enviadas"
+
+msgid "Related User Question Options" 
+msgstr "Respostas relacionadas"
+
+msgid "Related Forum Post Comments" 
+msgstr "Comentários em postagens"
+
+msgid "Related Forum Posts" 
+msgstr "Postagens criadas"
+
+msgid "Related Forums" 
+msgstr "Tópicos criados"
+
+msgid "Direct Message" 
+msgstr "Mensagens diretas"
+
+msgid "Related Instructors" 
+msgstr "Usuário instrutor"
+
+msgid "question_alternatives" 
+msgstr "Questões"
+
+msgid "Related Orders" 
+msgstr "Matrículas realizadas"
+
+msgid "Related User Module Logs" 
+msgstr "Logs de módulos"
+
+msgid "Related User Module Summaries" 
+msgstr "Grade de cursos"
+
+msgid "order_type_id" 
+msgstr "Status de venda"
+
+msgid "citie_id" 
+msgstr "Cidade"
+
+msgid "state_id" 
+msgstr "Estado"
+
+msgid "forums" 
+msgstr "Tópicos"
+
+msgid "Related Question Alternative Options" 
+msgstr "Opções de respostas relacionadas"
+
+msgid "Related Order Courses" 
+msgstr "Cursos relacionados"
+
+msgid "order_types" 
+msgstr "Status de vendas"
+
+msgid "Order Type Id" 
+msgstr "Status"
+
+msgid "Order Type" 
+msgstr "Status"
+
+msgid "Order Course" 
+msgstr "Curso"
+
+msgid "Related Users" 
+msgstr "Grupos relacionados"
+
+msgid "Forum Id" 
+msgstr "Tópico"
+
+msgid "Forum Post Id" 
+msgstr "Postagem"
+
+msgid "forum_id" 
+msgstr "Fórum"
+
+msgid "Module Discipline Id" 
+msgstr "Disciplinas"
+
+msgid "Question Alternative Option" 
+msgstr "Opção de resposta"
+
+msgid "Related User Questions" 
+msgstr "Avaliações respondidas"
+
+msgid "Forum Post Comment" 
+msgstr "Comentários"
+
+msgid "Forum Post" 
+msgstr "Postagens"
+
+msgid "forum_posts" 
+msgstr "Postagens"
+
+msgid "forum_post_comments" 
+msgstr "Comentários"
+
+msgid "forum_post_id" 
+msgstr "Postagens"
+
+msgid "User" 
+msgstr "Usuário"
+
+msgid "User Module Log" 
+msgstr "Log de módulo"
+
+msgid "User Module Summary" 
+msgstr "Grade de curso"
+
+msgid "User Question" 
+msgstr "Avaliações"
+
+msgid "Order" 
+msgstr "Venda"
+
+msgid "Forum" 
+msgstr "Fórum"
+
+msgid "User Id" 
+msgstr "Usuários"
+
+msgid "audio" 
+msgstr "Audio"
+
+msgid "view_user" 
+msgstr "Visto pelo usuário"
+
+msgid "direct_messages" 
+msgstr "Mensagem direta"
+
+msgid "Are you sure you want to delete # %s?" 
+msgstr "Tem certeza que deseja deletar o registro # %s?"
+
+msgid "view_instructor" 
+msgstr "Visto pelo instrutor"
+
+msgid "Related Courses" 
+msgstr "Cursos relacionados"
+
+msgid "Course" 
+msgstr "Curso"
+
+msgid "Related Modules" 
+msgstr "Módulos relacionados"
+
+msgid "Module" 
+msgstr "Módulo"
+
+msgid "Module Id" 
+msgstr "Módulos"
+
+msgid "Created" 
+msgstr "Criado em"
+
+msgid "Modified" 
+msgstr "Modificado em"
+
+msgid "embed_player" 
+msgstr "Embed do vídeo"
+
+msgid "Related Module Discipline Players" 
+msgstr "Vídeos Relacionados"
+
+msgid "Related Course Instructors" 
+msgstr "Instrutores Relacionados"
+
+msgid "Course Instructor" 
+msgstr "Instrutor"
+
+msgid "Related Module Discipline Sliders" 
+msgstr "Sliders Relacionados"
+
+msgid "Module Discipline Slider" 
+msgstr "Slider"
+
+msgid "Module Discipline Player" 
+msgstr "Vídeo"
+
+msgid "Text" 
+msgstr "Texto"
+
+msgid "question_alternative_id" 
+msgstr "Questão"
+
+msgid "Question Alternative" 
+msgstr "Questão / Alternativa"
+
+msgid "Module Discipline" 
+msgstr "Unidades"
+
+msgid "Related Module Disciplines" 
+msgstr "Unidades Relacionadas"
+
+msgid "Related Question Alternatives" 
+msgstr "Questões / Alternativas Relacionadas"
+
+msgid "Course Id" 
+msgstr "Cursos"
+
+msgid "Citie Id" 
+msgstr "Cidades"
+
+msgid "State Id" 
+msgstr "Estados"
+
+msgid "Related Module Courses" 
+msgstr "Curso / Módulos Relacionados"
+
+msgid "Module Course" 
+msgstr "Curso / Módulo"
+
+msgid "instructors" 
+msgstr "Instrutores"
+
+msgid "course_instructors" 
+msgstr "Instrutores por curso"
+
+msgid "course_id" 
+msgstr "Cursos"
+
+msgid "course_types" 
+msgstr "Tipos de curso"
+
+msgid "modules" 
+msgstr "Módulos"
+
+msgid "course_type_id" 
+msgstr "Tipos de curso"
+
+msgid "is_introduction" 
+msgstr "Introdução"
+
+msgid "value_time" 
+msgstr "Tempo total"
+
+msgid "module_disciplines" 
+msgstr "Unidades por módulo"
+
+msgid "position" 
+msgstr "Posição"
+
+msgid "module_discipline_sliders" 
+msgstr "Sliders da disciplina"
+
+msgid "module_discipline_players" 
+msgstr "Vídeos da disciplina"
+
+msgid "courses" 
+msgstr "Cursos"
+
+msgid "firstname" 
+msgstr "Subnome"
+
+msgid "is_module_avaliation" 
+msgstr "Simulado de módulo"
+
+msgid "min_time" 
+msgstr "Tempo mín."
+
+msgid "max_time" 
+msgstr "Tempo máx."
+
+msgid "max_time_module_avaliation" 
+msgstr "Tempo simulado"
+
+msgid "value_module_avaliation" 
+msgstr "% minima simulado"
+
+msgid "qt_question_module_avaliation" 
+msgstr "Qt questões da simulado"
+
+msgid "is_module_block" 
+msgstr "Bloq. Módulos"
+
+
+
+
+
+msgid "is_course_avaliation" 
+msgstr "Prova de curso"
+
+msgid "max_time_course_avaliation" 
+msgstr "Tempo de prova"
+
+msgid "value_course_avaliation" 
+msgstr "% minima prova"
+
+msgid "qt_question_course_avaliation" 
+msgstr "Qt questões da prova"
+
+msgid "is_certificate_block" 
+msgstr "Bloq. Certificado"
+
+msgid "is_course_certificate" 
+msgstr "Tem Certificado"
+
+
+
+
+
+
+msgid "module_discipline_id" 
+msgstr "Disciplinas"
+
+msgid "module_id" 
+msgstr "Módulos"
+
+msgid "id" 
+msgstr "Id"
+
+msgid "place_types" 
+msgstr "Tipos de Imóveis"
+
+msgid "Broker" 
+msgstr "Imobiliárias"
+
+msgid "Your username or password was incorrect." 
+msgstr "Ops! Dados inválidos, tente novamente."
+
+msgid "Good-Bye." 
+msgstr "Até breve!"
+
+msgid "brokers" 
+msgstr "Imobiliárias"
+
+msgid "broker_id" 
+msgstr "Imobiliárias"
+
+msgid "place_type_id" 
+msgstr "Tipos de Imóveis"
+
+msgid "place_comments" 
+msgstr "Publicações"
+
+msgid "place_comment_id" 
+msgstr "Publicações"
+
+msgid "place_comment_answers" 
+msgstr "Respostas das Publicações"
+
+msgid "histories" 
+msgstr "Histórias"
+
+msgid "grilles" 
+msgstr "Páginas Institucionais"
+
+msgid "categories" 
+msgstr "Categorias"
+
+msgid "category_id" 
+msgstr "Categoria"
+
+msgid "webdoors" 
+msgstr "Banner's"
+
+msgid "Actions" 
+msgstr "Ações"
+
+msgid "name" 
+msgstr "Nome"
+
+msgid "theme" 
+msgstr "Tema"
+
+msgid "status" 
+msgstr "Status"
+
+msgid "created" 
+msgstr "Criado em"
+
+msgid "modified" 
+msgstr "Modificado em"
+
+msgid "activity" 
+msgstr "Atividade"
+
+msgid "text" 
+msgstr "Texto"
+
+msgid "description" 
+msgstr "Descrição"
+
+msgid "plan_id" 
+msgstr "Planos"
+
+msgid "activities_id" 
+msgstr "Atividades"
+
+msgid "activitie_id" 
+msgstr "Atividades"
+
+msgid "instructor_id" 
+msgstr "Instrutores"
+
+msgid "week" 
+msgstr "Dia de Semana"
+
+msgid "hour" 
+msgstr "Hora"
+
+msgid "Sunday" 
+msgstr "Domingo" 
+
+msgid "Monday" 
+msgstr "Segunda-Feira" 
+
+msgid "Tuesday" 
+msgstr "Terça-Feira" 
+
+msgid "Wednesday" 
+msgstr "Quarta-Feira" 
+
+msgid "Thursday" 
+msgstr "Quinta-Feira" 
+
+msgid "Friday" 
+msgstr "Sexta-Feira" 
+
+msgid "Saturday" 
+msgstr "Sábado" 
+
+msgid "Activitie" 
+msgstr "Atividade" 
+
+msgid "Plan" 
+msgstr "Plano" 
+
+msgid "Instructor" 
+msgstr "Instrutor" 
+
+msgid "locale_id" 
+msgstr "Local" 
+
+msgid "clubdepartament_id" 
+msgstr "Departamento" 
+
+msgid "department_id" 
+msgstr "Departamento" 
+
+msgid "date" 
+msgstr "Data" 
+
+msgid "url" 
+msgstr "Url" 
+
+msgid "phone" 
+msgstr "Telefone" 
+
+msgid "address" 
+msgstr "Endereço" 
+
+msgid "news" 
+msgstr "Newsletter" 
+
+msgid "email" 
+msgstr "Email" 
+
+msgid "photo" 
+msgstr "Imagem" 
+
+msgid "photos" 
+msgstr "Imagens" 
+
+msgid "icon" 
+msgstr "Icone" 
+
+msgid "room" 
+msgstr "Sala" 
+
+msgid "cellphone" 
+msgstr "Celular" 
+
+msgid "birth" 
+msgstr "Nascimento" 
+
+msgid "cpf" 
+msgstr "CPF" 
+
+msgid "rg" 
+msgstr "RG" 
+
+msgid "gender" 
+msgstr "Sexo" 
+
+msgid "type" 
+msgstr "Tipo" 
+
+msgid "zipcode" 
+msgstr "CEP" 
+
+msgid "number" 
+msgstr "Número" 
+
+msgid "complement" 
+msgstr "Complemento" 
+
+msgid "neighborhood" 
+msgstr "Bairro" 
+
+msgid "city" 
+msgstr "Cidade" 
+
+msgid "state" 
+msgstr "Estado" 
+
+msgid "reference" 
+msgstr "Referência" 
+
+msgid "number of shares" 
+msgstr "Quantidade de cotas" 
+
+msgid "amount" 
+msgstr "Quantidade" 
+
+msgid "departament_id" 
+msgstr "Departamento" 
+
+msgid "client_id" 
+msgstr "Clientes" 
+
+msgid "notification" 
+msgstr "Notificação" 
+
+msgid "group_id" 
+msgstr "Grupo" 
+
+msgid "lastname" 
+msgstr "Nome Completo" 
+
+msgid "email" 
+msgstr "Email" 
+
+msgid "confirm_email" 
+msgstr "Confirme Email" 
+
+msgid "password" 
+msgstr "Senha" 
+
+msgid "confirm_password" 
+msgstr "Confirme Senha" 
+
+msgid "username" 
+msgstr "Login" 
+
+msgid "parent_id" 
+msgstr "Departamento" 
+
+msgid "code" 
+msgstr "Referência" 
+
+msgid "method_stock" 
+msgstr "Monitor" 
+
+msgid "star" 
+msgstr "Destaque" 
+
+msgid "price" 
+msgstr "Preço" 
+
+msgid "promotional_price" 
+msgstr "Preço Promocional" 
+
+msgid "price_discount" 
+msgstr "Desconto" 
+
+msgid "start" 
+msgstr "Data de Início" 
+
+msgid "finish" 
+msgstr "Data de Fim" 
+
+msgid "brand_id" 
+msgstr "Marcas" 
+
+msgid "url_player" 
+msgstr "URL Youtube" 
+
+msgid "tags" 
+msgstr "Tags de SEO" 
+
+msgid "weight" 
+msgstr "Peso" 
+
+msgid "width" 
+msgstr "Largura" 
+
+msgid "height" 
+msgstr "Altura" 
+
+msgid "length" 
+msgstr "Compr." 
+
+msgid "stock" 
+msgstr "Estoque" 
+
+msgid "maxBag" 
+msgstr "Qtde. máximo" 
+
+msgid "minBag" 
+msgstr "Qtde. mínimo" 
+
+msgid "image" 
+msgstr "Imagens" 
+
+
+
+
+msgid "My account" 
+msgstr "Minha conta"
+
+msgid "My orders" 
+msgstr "Meus pedidos"
+
+msgid "Contact" 
+msgstr "Contato"
+
+msgid "Login" 
+msgstr "Login"
+
+msgid "Signup" 
+msgstr "Cadastre-se"
+
+msgid "Items" 
+msgstr "Itens"
+
+msgid "$" 
+msgstr "R$"
+
+msgid "Institucional" 
+msgstr "Institucional"
+
+msgid "About"
+msgstr "Sobre"
+
+msgid "Nearest store"
+msgstr "Loja mais próxima"
+
+msgid "Work with us"
+msgstr "Trabalhe com a gente"
+
+msgid "Be our supplier"
+msgstr "Seja nosso fornecedor"
+
+msgid "Doubts"
+msgstr "Dúvidas"
+
+msgid "Call center"
+msgstr "Central de atendimento"
+
+msgid "How to buy"
+msgstr "Como comprar"
+
+msgid "Exchanges and returns"
+msgstr "Trocas e devoluções"
+
+msgid "Delivery process"
+msgstr "Processo de Entrega"
+
+msgid "Privacy policy"
+msgstr "Politica de privacidade"
+
+msgid "Terms and conditions"
+msgstr "Termos de uso e condições"
+
+msgid "Edit my profile"
+msgstr "Editar meu cadastro"
+
+msgid "Track your order"
+msgstr "Acompanhe seu pedido"
+
+msgid "Address Book"
+msgstr "Catálogo de endereços"
+
+msgid "Products"
+msgstr "Produtos"
+
+msgid "Recent viewed"
+msgstr "Últimos visualizados"
+
+msgid "next"
+msgstr "próximo"
+
+msgid "prev"
+msgstr "anterior"
+
+msgid "Buy"
+msgstr "Comprar"
+
+msgid "Code"
+msgstr "Ref."
+
+msgid "Brand"
+msgstr "Marca"
+
+msgid "Description"
+msgstr "Descrição"
+
+msgid "Specifications"
+msgstr "Especificações"
+
+msgid "Packing (W/H/L)"
+msgstr "Embalagem (L/A/C)"
+
+msgid "Weight"
+msgstr "Peso"
+
+msgid "Send Feedback"
+msgstr "Envie seu comentário"
+
+msgid "Review"
+msgstr "Comentários"
+
+msgid "Rating"
+msgstr "Nota"
+
+msgid "Message"
+msgstr "Mensagem"
+
+msgid "Limited to minimum"
+msgstr "Limitado ao mínimo de"
+
+msgid "products"
+msgstr "Produtos"
+
+msgid "places"
+msgstr "Imóveis"
+
+msgid "place_id"
+msgstr "Imóveis"
+
+msgid "users"
+msgstr "Usuários"
+
+msgid "user_id"
+msgstr "Usuários"
+
+msgid "groups"
+msgstr "Grupos"
+
+msgid "Wait"
+msgstr "Aguarde"
+
+msgid "What we do"
+msgstr "O que fazemos"
+
+msgid "Hello, welcome to"
+msgstr "Olá, Seja bem-vindo ao"
+
+msgid "webdoor" 
+msgstr "Banner"
+
+msgid "Activity" 
+msgstr "Atividade"
+
+msgid "title" 
+msgstr "Título"
+
+msgid "public" 
+msgstr "Publicação"
+
+msgid "view" 
+msgstr "Visualização"
+
+msgid "Price" 
+msgstr "Preço"
+
+msgid "The client could not be saved. Please, try again." 
+msgstr "O cadastro não pôde ser realizado. Por favor, verifique os dados digitados e tente novamente."
+
+msgid "You do not have permission to access this page. Make your log-in." 
+msgstr "Você não tem permissão de acesar esta página. Faça seu login!"
+
+msgid "The client has been saved." 
+msgstr "Cadastro realizado com sucesso!"
+
+msgid "I forgot my password" 
+msgstr "Esqueci minha senha"
+
+msgid "Phrase has been sent!" 
+msgstr "Frase enviada com sucesso!"
+
+msgid "The could not be saved. Please, try again." 
+msgstr "O registro não pôde ser realizado. Por favor, verifique os dados digitados e tente novamente."
+
+msgid "course_states" 
+msgstr "Estados Liberados"
+
+msgid "course_cities" 
+msgstr "Cidades Liberadas"
+
+msgid "discipline_code_id"
+msgstr "Código Detran"
+
+msgid "course_code_id"
+msgstr "Código Detran"
+
+msgid "exam_discipline_code_id"
+msgstr "Código da Prova no Detran"
+
+msgid "cod_cfc"
+msgstr "Cód. CFC"
+
+msgid "excerpt"
+msgstr "Resumo"
