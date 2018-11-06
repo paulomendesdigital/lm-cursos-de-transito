@@ -1,0 +1,150 @@
+#footer{
+	background: #f1f1f1;
+	text-align: center;
+	.footer-main{
+		padding: 30px 0;
+		h3{
+			text-transform: uppercase;			
+			font-size: 16px;			
+			margin-top: 0;			
+			display: inline-block;
+		}
+		.footer-col-content{
+			
+		}		
+		.menu{
+			ul{
+				margin: 0;
+				list-style: none;			
+				padding: 0;	
+				li{
+					border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+					a{
+						padding: 5px 0;
+						display: block;						
+					}					
+				}
+			}
+		}		
+		.menu-site-map{
+			a{
+				text-transform: uppercase;
+			}
+		}
+		.socials{
+			list-style: none;
+			margin: 0;
+			padding: 0;
+			li{
+				display: inline-block; 
+				vertical-align: middle;
+				i{
+					font-size: 2.5em;
+				}
+				+ li{
+					margin-left: 5px;					
+				}
+			}
+		}
+		.work-hours{
+			padding: 0;
+			list-style: none;
+			margin: 0;
+		}
+		.logo-footer{
+			width: 70%;
+			display: block;
+			margin: 10px auto 0;
+		}
+	}
+	.copyright{
+		background: $orange;
+		color: white;
+		line-height: 30px;
+		padding: 8px 0;		
+	}
+	.powered {
+		display: inline-block;
+		float: right;
+		color: #fff;
+		text-decoration: none;
+		img {
+			margin-left: 10px;
+			width: auto;
+			height: 30px;
+		}
+	}
+}
+
+@media(min-width: 768px){
+	
+}
+
+@media(max-width: 991px){
+	#footer{
+		.footer-main{
+			.col-footer{
+				+ .col-footer{
+					margin-top: 15px;
+					padding-top: 15px;					
+				}
+			}
+		}
+
+		.powered {
+			margin-top: 15px;
+			display: block;
+			float: none;
+		}
+	}
+}
+
+@media(min-width: 992px){
+	#footer{	
+		text-align: inherit;	
+		.footer-main{
+			h3{		
+				display: block;
+				padding-left: 15px;
+				border-left: 5px solid $orange;
+				font-weight: 300;
+			}
+			.footer-col-content{
+				
+			}			
+		}
+	}
+}
+
+@media(min-width: 1200px){
+	#footer{		
+		.footer-main{
+			h3{
+				font-size: 20px;
+			}
+			.footer-col-content{
+				padding-left: 20px;
+			}
+			.col-lm{
+				width: 32%;
+			}
+			.col-work-hour{
+				width: 18%;
+			}
+		}
+	}
+}
+
+.fa-instagram.fa-instagram-square {
+	background-color: #337ab7;
+	color: #fff;
+	border-radius: 6px;
+	font-size: 28px!important;
+	line-height: 28px;
+	width: 30px;
+	height: 32px;
+	padding: 2px;
+	&:hover {
+		background-color: #ffb800;
+	}
+}

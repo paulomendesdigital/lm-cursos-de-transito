@@ -1,0 +1,78 @@
+#signup {
+  $cor-primaria-padrao: #ffb800;
+
+  h1 {
+    font-size: 32px;
+    font-weight: 300;
+    color: #C3C3C3;
+    margin-top: 45px;
+  }
+
+  h2 {
+    color: #C3C3C3;
+    font-size: 18px;
+    margin-bottom: 15px;
+  }
+
+  h3 {
+    font-size: 18px;
+    font-weight: 600;
+    border-left: 6px solid $cor-primaria-padrao;
+    border-bottom: 1px solid #ededed;
+    color: #545454;
+    padding: 5px 10px;
+    margin: 40px 0 30px;
+  }
+
+  p.info {
+    font-size: 12px;
+    color: #878787;
+  }
+
+  p.info-senha {
+    font-size: 13px;
+    padding: 0 15px;
+  }
+
+  .form-group {
+    label {
+      color: #545454;
+      font-weight: 600;
+    }
+    &.required label:before {
+      content: "* ";
+      color: red;
+      white-space: nowrap;
+    }
+    .error-message, .help-block-error {
+      color: #a94442;
+    }
+  }
+
+  .form-control {
+    border-radius: 0;
+    border: 1px solid #B3B3B3;
+    box-shadow: none;
+
+    &:focus {
+      border-color: $cor-primaria-padrao;
+      -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 5px rgba($cor-primaria-padrao, 0.6);
+      box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 5px rgba($cor-primaria-padrao, 0.6);
+    }
+  }
+
+  .btn-cadastrar {
+    height: 54px;
+    display: block;
+    position: relative;
+    margin: 25px auto;
+    border-radius: 0;
+    font-size: 17px;
+    font-weight: 600;
+    background-color: $cor-primaria-padrao;
+    &:hover {
+      background-color: lighten($cor-primaria-padrao, 7);
+    }
+  }
+}
+

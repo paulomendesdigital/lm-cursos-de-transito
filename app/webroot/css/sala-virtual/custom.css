@@ -1,0 +1,24 @@
+a{color: #000032;}
+
+/* BACKGROUND COLOR HEADER */
+.bg-blue-400{background-color:#000032;}
+.text-headline{font-size: 1.70rem;}
+.vertical-align-top{vertical-align: top;}
+.col-right .text-title{font-size: 1.40rem;}
+.thick-line{border-top: 5px solid #eee;}
+.margin-bottom-30{margin-bottom: 30px;}
+.text-justify{text-align: justify;}
+.width-full{width: 100%;}
+
+@media (max-width: 767px) {
+	.jumbotron h1, .text-display-1{font-size: 1.5rem; line-height: 2rem;}
+	.text-headline{font-size: 1.2rem; line-height: 1.5rem; text-align: center;}
+	.sub-title{font-size: 11px;}
+	.view-result{font-size: 14px;}
+	.page-section{padding-bottom: 10px;}
+	.icon-block.half{width: 30px;
+		height: 30px;
+		line-height: 30px;
+		font-size: 16px;
+	}
+}

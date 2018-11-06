@@ -1,0 +1,45 @@
+.colun-config-right .form-group{margin-bottom: 0;}
+.td-img{width: 85px !important;}
+.label-status-detran {
+    padding: 2px;
+    margin-bottom: 2px;
+}
+
+.auto-select2 {
+    width: 100%;
+    display: block;
+}
+.auto-select2.select2-container .select2-choice > .select2-chosen {
+    text-transform: none;
+    font-size: inherit;
+    font-weight: inherit;
+    color: #555;
+}
+.form-control.auto-select2 {
+    padding: 0;
+    border: none;
+}
+
+.help-inline.error-message {
+    color: #a94442;
+    display: block;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.text-uppercase {
+    text-transform: uppercase;
+}
+
+.btn-connection {
+    width: 38px;
+    height: 31px;
+}
+
+.btn-connection .icon-connection {
+    font-size: 14px;
+}
+
+.select2-hidden-accessible {
+    display: none;
+}
