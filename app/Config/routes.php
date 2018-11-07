@@ -31,6 +31,7 @@ Router::connect('/', array('controller' => 'pages', 'action' => 'index'));
 Router::connect('/quem-somos', array('controller' => 'pages', 'action' => 'quemsomos'));
 Router::connect('/termos-de-servico', array('controller' => 'pages', 'action' => 'termoservico'));
 Router::connect('/contato', array('controller' => 'pages', 'action' => 'contact'));
+Router::connect('/parceria', array('controller' => 'pages', 'action' => 'partner'));
 Router::connect('/nossa-equipe', array('controller' => 'instructors', 'action' => 'index'));
 Router::connect('/recuperar-senha', array('controller' => 'users', 'action' => 'pass'));
 Router::connect('/acesso-aluno', array('controller' => 'users', 'action' => 'login'));

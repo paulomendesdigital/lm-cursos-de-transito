@@ -22,10 +22,17 @@
             <div class="collapse navbar-collapse" id="main-nav">
                 <ul class="nav navbar-nav navbar-right">
                     <li><?php echo $this->Html->link('Início',['controller'=>'pages','action'=>'index','prefixes'=>false],['class'=>$this->Utility->__getActiveClass('pages','index')]); ?></li>
+                    
+                    <li><?php echo $this->Html->link('Parceria',['controller'=>'pages','action'=>'partner','prefixes'=>false]); ?></li>
+                    
                     <li><?php echo $this->Html->link('Quem Somos',['controller'=>'pages','action'=>'quemsomos','prefixes'=>false],['class'=>$this->Utility->__getActiveClass('pages','quemsomos')]); ?></li>
+
                     <li><?php echo $this->Html->link('Nossa Equipe',['controller'=>'instructors','action'=>'index','prefixes'=>false],['class'=>$this->Utility->__getActiveClass('instructors','index')]); ?></li>
+                    
                     <li><?php echo $this->Html->link('Termo de Serviço',['controller'=>'pages','action'=>'termoservico','prefixes'=>false],['class'=>$this->Utility->__getActiveClass('pages','termoservico')]); ?></li>
+                    
                     <li><?php echo $this->Html->link('Contato',['controller'=>'pages','action'=>'contact','prefixes'=>false]); ?></li>
+                    
                     <li><a href="https://concursoscomtransito.com.br" target="_blank" title="Cursos Online para Polícia Rodoviária Federal">Curso Online PRF</a></li>
                     <!--
                     <li><?php echo $this->Html->link('Meus Cursos', ['controller' => 'meus-cursos', 'action' => 'index']);?></li>
