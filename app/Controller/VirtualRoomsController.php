@@ -601,7 +601,7 @@ class VirtualRoomsController extends AppController {
 	    	],
 	    	'imgVersoBase64' 		=> base64_encode(file_get_contents('img/certificate/background3.png')),
 			'imgAssinaturasBase64' 	=> base64_encode(file_get_contents('img/certificate/assinatura-dupla-v2.png')),
-			'qrCode' => base64_encode(file_get_contents('https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=http://dev.lmcursosdetransito.com.br/pages/certificate/' . $UserCertificate['UserCertificate']['user_id']))
+			'qrCode' => base64_encode(file_get_contents('https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https://lmcursosdetransito.com.br/pages/certificate/' . $UserCertificate['UserCertificate']['user_id']))
     	);
 
 	    $this->set('data',$data);
