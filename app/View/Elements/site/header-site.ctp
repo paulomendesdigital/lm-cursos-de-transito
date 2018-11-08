@@ -23,7 +23,11 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li><?php echo $this->Html->link('Início',['controller'=>'pages','action'=>'index','prefixes'=>false],['class'=>$this->Utility->__getActiveClass('pages','index')]); ?></li>
                     
-                    <li><?php echo $this->Html->link('Parceria',['controller'=>'pages','action'=>'partner','prefixes'=>false]); ?></li>
+                    <!-- <li>
+                        <?php 
+                        // echo $this->Html->link('Parceria',['controller'=>'pages','action'=>'partner','prefixes'=>false]); 
+                        ?>
+                    </li> -->
                     
                     <li><?php echo $this->Html->link('Quem Somos',['controller'=>'pages','action'=>'quemsomos','prefixes'=>false],['class'=>$this->Utility->__getActiveClass('pages','quemsomos')]); ?></li>
 
