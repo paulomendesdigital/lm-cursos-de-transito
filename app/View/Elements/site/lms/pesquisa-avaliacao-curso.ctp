@@ -1,10 +1,13 @@
 
 <div class="list-group-item media bg-grey-200 text-center" data-target="<?php echo $course['Course']['avaliation']['link_avaliation'];?>">
-	<p>
+	<p class="text-danger text-warning-message">
 		Caro (a) aluno (a), parabéns, você concluiu o seu curso! Para finalizar, pedimos a gentileza de responder o questionário a seguir. Sua opinião proporcionará a melhoria constante dos nossos serviços.
-	</p>
+    </p>
+    
 	<p>
-	    <a href="javascript:void(0);" class="btn btn-success btn-lg text-center" data-toggle="modal" data-target="#modalAvaliacao"><i class="fa fa-fw fa-asterisk"></i> Responder Agora</a>
+        <a href="javascript:void(0);" class="btn btn-success btn-lg btn-answer-certificate text-center" data-toggle="modal" data-target="#modalAvaliacao"><i class="fa fa-fw fa-asterisk"></i>
+            <?php echo $btnAnswer; ?>
+        </a>
 	</p>
 </div>
 

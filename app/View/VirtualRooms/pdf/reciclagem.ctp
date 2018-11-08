@@ -43,8 +43,11 @@
             .verso_description{width: 100%; text-align: left; font-size: 15px;}
             .verso_workload{width: 100%; text-align: left; font-size: 15px;}
         
-            .verso_conteudo_programatico{margin-top: 20px; text-transform: uppercase;}
+            .verso_conteudo_programatico{float: left; margin-top: 20px; text-transform: uppercase;}
             .verso_conteudo_programatico ul{ font-size: 12px;list-style: none; float: left; margin: 0px; padding: 0px; line-height: 1.5;}
+            .verso_qrcode{
+                position: absolute; bottom:150px; right:70px; width: 160px; height: 160px; margin: 0px; padding: 0px; background: url('data:image/jpeg;base64,<?php echo $data['qrCode'];?>'); background-position: top center;
+            }
             .verso_footer{text-align: center;bottom: 0px;position: absolute;font-size: 14px;margin-bottom: 13px;}
             .verso_footer p.corporate_name{font-weight: 700; margin-bottom: 0px;}
             .verso_footer p.address{font-size: 12px;}
@@ -119,6 +122,8 @@
                     <?php $i++; endforeach;?>
                 </ul>
             </div>
+
+            <div class="verso_qrcode"></div>
             
             <div class="verso_footer">
             	<p class="corporate_name"><strong><?php echo Configure::read('Sistems.CorporateName');?></strong></p>

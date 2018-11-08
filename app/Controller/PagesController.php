@@ -36,7 +36,8 @@ class PagesController extends AppController {
         $this->set(compact('quemsomos'));
 	}
 
-    public function partner(){
+    public function partner()
+    {
         if($_POST):
             $this->autoRender = false;
             $template = 'pages_partner';
@@ -79,6 +80,73 @@ class PagesController extends AppController {
             }
 
         endif;
+    }
+
+    public function certificate($id) 
+    {
+        $this->loadModel('User');
+
+        if (!$this->User->exists($id)) {
+            throw new NotFoundException(__('Condutor inválio'));
+        }
+
+        $options = array('conditions' => array('User.' . $this->User->primaryKey => $id));
+
+        $this->set('user', $this->User->find('first', $options));
+
+    	/* Validação de Token de acesso */
+    	// $OrderCourse = $this->_accessCourseSecurity($id);
+    	// if(!$OrderCourse){
+    	// 	throw new NotFoundException(__('Curso Inválido'));
+    	// }
+
+    	// $user_id = $id;
+
+    	// $order_id 	= $OrderCourse['OrderCourse']['order_id'];
+    	// $course_id 	= $OrderCourse['OrderCourse']['course_id'];
+    	// $citie_id 	= $OrderCourse['OrderCourse']['citie_id'];
+    	// $state_id 	= $OrderCourse['OrderCourse']['state_id'];
+		
+		// /* Identificar o início do curso */
+	    // $this->loadModel('Order');
+	    // $this->Order->recursive = -1;
+	    // $order = $this->Order->findById($order_id);
+
+	    // /* Consulta a configuação do curso e os dados da conclusão */
+		// $course = $this->_findCourse($course_id, $order_id);
+
+		// if(!$course){
+		// 	throw new NotFoundException(__('Curso Inválido'));
+    	// }
+
+    	// $this->loadModel('UserCertificate');
+    	// $UserCertificate = $this->UserCertificate->__getCertificate($order_id, $user_id, $course_id);
+
+    	// $conditionsModuleCourse = $this->__getConditionsForScope($course_id, $course['CourseType']['scope'], $state_id, $citie_id);
+		
+		// /* Consulta da lista de módulos */
+    	// $this->loadModel('ModuleCourse');
+    	// $module_courses = $this->ModuleCourse->__getModuleCourseInOrder($order_id, $user_id, $conditionsModuleCourse, $course);
+
+	    // if( empty($UserCertificate) ){
+
+	    // 	//criando o certificado
+	    // 	if( !$this->UserCertificate->__createCertificate($order, $user_id, $course, $module_courses) ){
+	    // 		throw new NotFoundException(__('Não foi possível gerar o certificado!'));
+	    // 	}
+	    // }
+	    // else{
+
+	    // 	//atualizando dados do certificado
+	    // 	if( !$this->UserCertificate->__updateCertificate($order, $user_id, $course, $module_courses, $UserCertificate) ){
+	    // 		throw new NotFoundException(__('Não foi possível gerar o certificado!'));
+	    // 	}
+	    // }
+
+	    // //recarrega UserCertificate
+	    // $UserCertificate = $this->UserCertificate->__getCertificate($order_id, $user_id, $course_id);
+
+	    // $this->__printCertificate( $order_id,  $UserCertificate);
     }
 
 	public function termoservico(){

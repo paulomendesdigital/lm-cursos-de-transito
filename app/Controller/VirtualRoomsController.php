@@ -52,7 +52,7 @@ class VirtualRoomsController extends AppController {
     	$OrderCourse = $this->_accessCourseSecurity($id);
     	if(!$OrderCourse){
     		throw new NotFoundException(__('Curso Inválido'));
-    	}
+		}
 
     	$order_id = $OrderCourse['OrderCourse']['order_id'];
     	$course_id = $OrderCourse['OrderCourse']['course_id'];
@@ -63,13 +63,20 @@ class VirtualRoomsController extends AppController {
 		$course = $this->_findCourse($course_id, $order_id);
 		if(!$course){
     		throw new NotFoundException(__('Curso Inválido'));
-    	}
+		}
+		
+		/* texto do padrão do botão para pesquisa de satisfação do curso */
+		$btnAnswer = 'Responder Agora';
+
+		/* Modifica o texto do padrão do botão para pesquisa de satisfação do curso */
+		if($course['Course']['id'] == 1) {
+			$btnAnswer = 'Responda Agora para Imprimir Certificado';
+		}
 
 		$this->__SetModulesCourse($token, $OrderCourse, $course);
 
 		$this->__SetPoll();
-
-		$this->set('scheduling_link_detran', $this->__GetSchedulingLinkDetran($course, $state_id));
+		$this->set('scheduling_link_detran', $this->__GetSchedulingLinkDetran($course, $state_id, $btnAnswer));
 	}
 
 	/*
@@ -561,10 +568,10 @@ class VirtualRoomsController extends AppController {
 	    	if( !$this->UserCertificate->__updateCertificate($order, $user_id, $course, $module_courses, $UserCertificate) ){
 	    		throw new NotFoundException(__('Não foi possível gerar o certificado!'));
 	    	}
-	    }
+		}
 
 	    //recarrega UserCertificate
-	    $UserCertificate = $this->UserCertificate->__getCertificate($order_id, $user_id, $course_id);
+		$UserCertificate = $this->UserCertificate->__getCertificate($order_id, $user_id, $course_id);
 
 	    $this->__printCertificate( $order_id,  $UserCertificate);
 	}
@@ -593,11 +600,12 @@ class VirtualRoomsController extends AppController {
 	    		'cpf'	=>	'112.875.967-54'
 	    	],
 	    	'imgVersoBase64' 		=> base64_encode(file_get_contents('img/certificate/background3.png')),
-	    	'imgAssinaturasBase64' 	=> base64_encode(file_get_contents('img/certificate/assinatura-dupla-v2.png')),
+			'imgAssinaturasBase64' 	=> base64_encode(file_get_contents('img/certificate/assinatura-dupla-v2.png')),
+			'qrCode' => base64_encode(file_get_contents('https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=http://dev.lmcursosdetransito.com.br/pages/certificate/' . $UserCertificate['UserCertificate']['user_id']))
     	);
 
 	    $this->set('data',$data);
-	    $this->set($params);
+		$this->set($params);
 
 	    $this->render('reciclagem');
 	}

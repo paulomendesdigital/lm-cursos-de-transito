@@ -46,13 +46,12 @@
           <?php if( $course['Course']['is_course_certificate'] ): //Se o curso tiver certficiado?>
             
             <?php if( empty($poll) ): //Se $poll for vazio é pq não existe avalicao cadastrada ou ele já respondeu.?>
-              
               <?php echo $this->Element('site/lms/certificate-box-element-list', ['course'=>$course,'modules'=>$modules,'scheduling_link_detran'=>$scheduling_link_detran]);?>
             
             <?php else:?>
               
               <?php if( $course['Course']['avaliation']['show_certificate'] ):?>
-                <?php echo $this->Element('site/lms/pesquisa-avaliacao-curso', ['course'=>$course,'modules'=>$modules, 'poll'=>$poll]);?>
+                <?php echo $this->Element('site/lms/pesquisa-avaliacao-curso', ['course'=>$course,'btnAnswer'=>$btnAnswer,'modules'=>$modules, 'poll'=>$poll]);?>
               <?php endif;?>
             
             <?php endif;?>
