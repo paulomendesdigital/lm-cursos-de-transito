@@ -65,11 +65,11 @@ class EmailConfig {
         'password' => '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',
     );
 
-    public $gmail = array(
-        'host' => 'ssl://smtp.gmail.com',
-        'port' => 465,
-        'username' => 'paulomendesdigital@gmail.com',
-        'password' => 'up65B5ap1',
-        'transport' => 'Smtp'
-    );
+    // public $gmail = array(
+    //     'host' => 'ssl://smtp.gmail.com',
+    //     'port' => 465,
+    //     'username' => 'myemmail@gmail.com',
+    //     'password' => '',
+    //     'transport' => 'Smtp'
+    // );
 }
