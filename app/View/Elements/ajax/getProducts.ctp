@@ -1,1 +1,0 @@
-<?php echo $this->Form->input('product_id',array('div'=>false,'label'=>false,'empty'=>'Escolha o produto','options'=>$productoptions,'id'=>'ProductId')); ?>
