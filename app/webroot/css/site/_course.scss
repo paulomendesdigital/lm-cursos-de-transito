@@ -1,0 +1,324 @@
+#course{
+	.course{
+		.course-name{
+			border-bottom: 1px solid #ddd;
+			margin-bottom: 30px;
+			padding-bottom: 10px;
+			text-align: center;
+		}
+		.course-description{
+			text-align: justify;
+			overflow: hidden;
+			.course-image{
+
+			}
+			table{
+				text-align: initial;
+			}
+		}
+		.modules-container{
+			margin-top: 20px;
+			.modules-table{
+				.table-cell{
+					&:first-child{
+						text-align: left;
+					}
+				}
+			}
+		}
+		.promotion-price{
+			.text-card{
+				font-size: 16px;
+				margin-bottom: 5px;
+				margin-top: -5px;
+			}
+			.text-parcels{
+				margin-bottom: 15px;
+			}
+		}
+		.choice-state{
+			padding: 15px;
+			.alert{
+				text-align: center;
+				h3{
+					margin-top: 0;
+					text-transform: uppercase;
+				}
+			}
+			ul{
+				list-style: none;
+				padding-left: 0;
+				margin-bottom: 0;
+				li{
+					margin-bottom: 15px;
+					a{
+						padding: 10px;
+					}
+					&:last-child{
+						margin-bottom: 0;
+					}
+				}
+			}
+		}
+		.deposit-informations{
+			text-align: center;
+			h4{
+				margin-bottom: 0;
+				+ p{
+					margin-bottom: 10px;
+				}
+			}
+			ul{
+				list-style: none;
+				padding-left: 0;
+				margin-bottom: 0;
+			}
+		}
+		.cpf-form{
+			h4{
+				text-align: center;
+				margin: 0;
+			}
+			h5{
+				text-align: center;
+				font-size: 16px;
+				margin-top: 0;
+			}
+		}
+
+		#cart-form {
+			.btn-matricula {
+				margin-top: 5px;
+				cursor: pointer;
+				&:disabled {
+					cursor: not-allowed;
+					background-color: #a1a1a1;
+					border-color: #a1a1a1;
+				}
+			}
+			label.error {
+				font-size: 13px;
+				color: #a94442;
+			}
+		}
+	}
+
+
+	#modal-estado {
+		text-align: center;
+
+		@media screen and (min-width: 768px) {
+			&:before {
+				display: inline-block;
+				vertical-align: middle;
+				content: " ";
+				height: 100%;
+			}
+		}
+
+		.modal-dialog {
+			display: inline-block;
+			text-align: left;
+			vertical-align: middle;
+		}
+
+		.modal-content {
+			-webkit-border-radius: 0;
+			-webkit-background-clip: padding-box;
+			-moz-border-radius: 0;
+			-moz-background-clip: padding;
+			border-radius: 6px;
+			background-clip: padding-box;
+			-webkit-box-shadow: 0 0 40px rgba(0,0,0,.5);
+			-moz-box-shadow: 0 0 40px rgba(0,0,0,.5);
+			box-shadow: 0 0 40px rgba(0,0,0,.5);
+			color: #000;
+			background-color: #fff;
+			border: rgba(0,0,0,0);
+
+			.form-control {
+				border-radius: 0;
+				border: 1px solid #B3B3B3;
+				box-shadow: none;
+				&:focus {
+					border-color: #ffb800;
+					-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 5px rgba(255,184,0,.6);
+					box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 5px rgba(255,184,0,.6);
+				}
+			}
+		}
+
+		.modal-dialog {
+			width: 300px;
+		}
+		.modal-body, .modal-footer, .modal-header, .modal-title {
+			background: 0 0;
+			border: none;
+			margin: 0;
+			padding: 0 20px;
+			text-align: center!important;
+		}
+		.modal-title {
+			font-size: 17px;
+			color: #737373;
+			margin-bottom: 3px;
+		}
+		.modal-body {
+			color: #737373;
+		}
+		.modal-header {
+			text-align: left;
+			color: #f4b400;
+			border-bottom: 3px solid #ffce55;
+			margin-bottom: 10px;
+			padding: 15px 0 8px;
+
+			.fa, .glyphicon, .typcn, .wi {
+				font-size: 30px;
+			}
+
+			img {
+				max-height: 35px;
+			}
+		}
+		.modal-footer {
+			margin: 25px 0 20px;
+			padding-bottom: 10px;
+		}
+	}
+
+	.buy-section {
+
+		margin: 20px 0 50px;
+		background: #edeef0;
+
+		form {
+			display: -webkit-box;
+			display: -webkit-flex;
+			display: -ms-flexbox;
+			display:         flex;
+			flex-wrap: wrap;
+			flex-direction: column;
+
+			@media(min-width: 768px){
+				flex-direction: row;
+			}
+		}
+
+		.box {
+			background: #edeef0;
+			padding: 15px;
+			flex: 1;
+			@media(min-width: 768px){
+				padding: 30px;
+			}
+		}
+
+		.promotion-price {
+			font-size: 20px;
+			font-weight: 300;
+			margin-bottom: 20px;
+			p {
+				margin: 0;
+			}
+			.old-price span {
+				text-decoration: line-through rgba(0, 0, 0, .4);
+			}
+			.new-price span {
+				font-size: 28px;
+				font-weight: 700;
+				color: #ffb800;
+			}
+			.parcelas {
+				font-weight: 500;
+				span {
+					font-size: 28px;
+					font-weight: 700;
+					color: #ffb800;
+				}
+			}
+			.ou {
+				font-size: 20px;
+				margin: 0;
+			}
+		}
+
+		.btn-comprar {
+			border: none;
+			font-size: 22px;
+			font-weight: 700;
+			color: #fff;
+			text-align: center;
+			height: 50px;
+			border-radius: 0;
+			outline: 0;
+			width: 100%;
+			text-transform: uppercase;
+		}
+
+		.formas-pagamento {
+			margin-top: 20px;
+		}
+
+		&.vertical {
+			padding: 0;
+			margin: 0;
+			form {
+				flex-direction: column;
+			}
+			.box {
+				padding: 15px;
+			}
+		}
+	}
+
+}
+
+@media(max-width: 767px){
+	#course{
+		.course{
+			.course-name{	
+				font-size: 20px;				
+			}
+			.course-image{
+				margin-left: auto;
+				margin-right: auto;
+				display: table;
+			}
+		}
+	}
+}
+
+@media(min-width: 768px){
+	#course{
+		.course{
+			.course-name{	
+				
+			}
+			.course-image{
+				float: left;
+				width: 140px;
+				margin-right: 20px;
+			}
+			.modules-container{				
+				.modules-table{
+					.table-cell{					
+						&:last-child{
+							width: 100px;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+@media(min-width: 992px){
+	#course{
+		.course{
+			.course-name{	
+				text-align: inherit;
+			}
+		}
+	}
+}
