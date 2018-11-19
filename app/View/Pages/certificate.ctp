@@ -4,12 +4,24 @@
  * QuemSomos View
  *
 */ ?>
+
 <div id='who-we-are' class='page'>
 	<div class='container'>
 		<div class='box-who-we-are box-grey big-box col-md-12'>
 			<span class='description'>
                 
                 <h2 class="text-center"><b>Nº do Certificado:</b> <?php echo str_pad($user['UserCertificate'][0]['id'], 6, '0', STR_PAD_LEFT); ?></h2>
+                <br>
+
+                <div class="col-md-6">
+                    <b>Curso:</b> <?php echo $user['UserCertificate'][0]['course_name']; ?>
+                </div>
+
+                <div class="col-md-6">
+                    <b>Acerto:</b> <?php echo $user['UserCertificate'][0]['score'] . '%'; ?>
+                </div>
+
+                <br>
                 <br>
 
                 <div class="col-md-6">

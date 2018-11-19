@@ -51,7 +51,12 @@
             <?php else:?>
               
               <?php if( $course['Course']['avaliation']['show_certificate'] ):?>
-                <?php echo $this->Element('site/lms/pesquisa-avaliacao-curso', ['course'=>$course,'btnAnswer'=>$btnAnswer,'modules'=>$modules, 'poll'=>$poll]);?>
+                <?php
+                
+                $btnAnswer = ($btnAnswer ? $btnAnswer : 'Responder Agora');
+
+                echo $this->Element('site/lms/pesquisa-avaliacao-curso', ['course'=>$course,'btnAnswer'=>$btnAnswer,'modules'=>$modules, 'poll'=>$poll]);
+                ?>
               <?php endif;?>
             
             <?php endif;?>
