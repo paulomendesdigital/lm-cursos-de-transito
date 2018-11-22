@@ -607,7 +607,7 @@ class AppController extends Controller {
 
         $Sistems = Configure::read('Sistems');
 
-        $Email = new CakeEmail('sendGrid');
+        $Email = new CakeEmail('gmail');
 		
         $Email->from(array($Sistems['EmailTo'] => $Sistems['EmailName']));        
 

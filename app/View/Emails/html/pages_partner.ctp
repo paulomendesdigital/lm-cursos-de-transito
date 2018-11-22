@@ -16,6 +16,9 @@
     Bairro: <?php echo $data['content']['neighborhood'];?><br>
     CEP: <?php echo $data['content']['zip_code'];?><br>
     Cidade: <?php echo $data['content']['city'];?> - UF <?php echo $data['content']['state'];?><br>
+
+    <p><strong>Contato:</strong></p>
+
     Telefone Res: <?php echo $data['content']['phone'];?><br>
     Telefone Cel: <?php echo $data['content']['cellphone'];?><br>
     E-mail: <?php echo $data['content']['email'];?><br>

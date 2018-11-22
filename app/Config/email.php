@@ -54,22 +54,22 @@ class EmailConfig {
         'headerCharset' => 'utf-8',
     );
 
-    public $sendGrid = array(
-        'transport' => 'Smtp',
-        'from' => array('contato@lmcursosdetransito.com.br' => 'LM Cursos'),
-        'sender' => 'contato@lmcursosdetransito.com.br',
-        'host' => 'ssl://smtp.sendgrid.net',
-        'port' => 465,
-        'timeout' => 30,
-        'username' => 'apikey',
-        'password' => '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',
-    );
-
-    // public $gmail = array(
-    //     'host' => 'ssl://smtp.gmail.com',
+    // public $sendGrid = array(
+    //     'transport' => 'Smtp',
+    //     'from' => array('contato@lmcursosdetransito.com.br' => 'LM Cursos'),
+    //     'sender' => 'contato@lmcursosdetransito.com.br',
+    //     'host' => 'ssl://smtp.sendgrid.net',
     //     'port' => 465,
-    //     'username' => 'myemmail@gmail.com',
-    //     'password' => '',
-    //     'transport' => 'Smtp'
+    //     'timeout' => 30,
+    //     'username' => 'apikey',
+    //     'password' => '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',
     // );
+
+    public $gmail = array(
+        'host' => 'ssl://smtp.gmail.com',
+        'port' => 465,
+        'username' => 'webmaster@lmcursosdetransito.com.br',
+        'password' => 'LmCursos@@2018!',
+        'transport' => 'Smtp'
+    );
 }
