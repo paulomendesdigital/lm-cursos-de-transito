@@ -64,7 +64,7 @@ class CoursesController extends AppController {
     * @return void
     */
 
-    public function view($id = null, $slug = null, $uf = null)
+    public function view($id = null, $slug = null, $uf = null, $company = null)
     {
         if (!$this->Course->exists($id)) {
             throw new NotFoundException(__('Invalid course'));
@@ -178,6 +178,146 @@ class CoursesController extends AppController {
         $states = array_combine($keysStates, $states);
 
         //view
+        $this->set('course', $course);
+        $this->set('recycle',$recycle);
+        $this->set('especializado', $especializado);
+        $this->set('cnh_categories', $this->getCnhCategoriesList());
+        $this->set('currentCourseState', $currentCourseState);
+        $this->set('stateActive', $stateActive);
+        $this->set('states',$states);
+        $this->set('statesAbbreviation',$statesAbbreviation);
+        $this->set('course_scopes',$course_scopes);
+        $this->set('state_id', $currentCourseState ? $currentCourseState['State']['id'] : null);
+        $this->set('city_id', null);
+        $this->set('user', $this->Auth->user());
+        $this->set('order_in_school', $orderInSchool);
+    }
+
+    
+
+    /**
+    * view method
+    *
+    * @throws NotFoundException
+    * @param string $id
+    * @return void
+    */
+
+    public function landing_page($id = null, $slug = null, $uf = null, $companyPartner = null)
+    {
+        if (!$this->Course->exists($id)) {
+            throw new NotFoundException(__('Invalid course'));
+        }
+
+        $this->Course->Behaviors->load('Containable');
+        $this->Course->recursive = -1;
+
+        $course_scopes = $this->Course->CourseType->__listScopesByText();
+
+        $course_test = $this->Course->find('first',[
+            'fields'=>['Course.course_type_id'],
+            'conditions'=>['Course.id' => $id],
+            'contain' => [
+                'CourseType'=>['fields'=>['CourseType.scope']]
+            ]
+        ]);
+
+        $this->loadModel('CourseState');
+        $this->CourseState->Behaviors->load('Containable');
+
+
+        $ModuleCourseConditions = [
+            'ModuleCourse.module_id' => $this->Course->ModuleCourse->Module->find('list',['fields'=>['Module.id'],'conditions'=>['Module.is_introduction'=>0]]),
+        ];
+
+        $currentCourseState = null;
+        $orderInSchool      = false;
+        $stateActive        = true;
+        if ($course_test['CourseType']['scope'] == $course_scopes['Estadual']) {
+
+            if (empty($uf)) {
+                $ModuleCourseConditions['ModuleCourse.state_id'] = null;
+            } else {
+                $arrCourseState = $this->CourseState->find('first', [
+                    'contain'    => ['State'],
+                    'conditions' => [
+                        'CourseState.course_type_id' => $course_test['Course']['course_type_id'],
+                        'State.abbreviation'         => strtoupper($uf)
+                    ]
+                ]);
+                if (isset($arrCourseState['State']['name'])) {
+                    $currentCourseState = $arrCourseState;
+                    $ModuleCourseConditions['ModuleCourse.state_id'] = $currentCourseState['State']['id'];
+                }
+            }
+        } elseif ($course_test['CourseType']['scope'] == $course_scopes['Municipal']) {
+            $ModuleCourseConditions['ModuleCourse.state_id'] = null;
+            $ModuleCourseConditions['ModuleCourse.citie_id'] = null;
+        }
+
+        $course = $this->Course->find('first', [
+            'conditions' => ['Course.' . $this->Course->primaryKey => $id,'Course.status'=>1],
+            'contain'=>[
+                'CourseType',
+                'ModuleCourse' => [
+                    'conditions' => $ModuleCourseConditions,
+                    'order'=>['ModuleCourse.position ASC'],
+                    'Module' => [
+                        'conditions'=>['Module.is_introduction'=>0]
+                    ]
+                ]
+            ]
+        ]);
+
+        if ($currentCourseState) {
+            $course['Course']['name'] .= ' ' . $this->getPreposicaoUF($currentCourseState['State']['abbreviation']) . ' ' . $currentCourseState['State']['name'];
+            $course['Course']['promotional_price'] = $currentCourseState['CourseState']['price'];
+
+            $orderInSchool = $currentCourseState['CourseState']['order_in_school'];
+            $stateActive   = $currentCourseState['CourseState']['status'];
+        }
+
+        $recycle = $course['CourseType']['id'] == $this->Course->CourseType->__getReciclagemId() ? true : false;
+        $especializado = $course['CourseType']['id'] == $this->Course->CourseType->__getEspecializadosId() ? true : false;
+
+        //estados
+        $arrStatesEnabled = $this->CourseState->find('list', [
+            'fields' => ['State.id', 'State.id'],
+            'contain'    => ['State'],
+            'conditions' => [
+                'CourseState.course_type_id' => $course['Course']['course_type_id'],
+                'CourseState.status'         => 1
+            ]
+        ]);
+
+        $arrStatesModuleEnabled = $this->Course->ModuleCourse->find('list',[
+            'fields'=>['ModuleCourse.state_id'],
+            'conditions'=> ['ModuleCourse.course_id'=>$course['Course']['id']]
+        ]);
+        $arrStatesEnabled = array_intersect($arrStatesEnabled, $arrStatesModuleEnabled);
+
+        $this->loadModel('State');
+        $statesResult = $this->State->find('all',[
+            'conditions'=>[
+                'State.id' => $arrStatesEnabled,
+            ]
+        ]);
+
+        $states             = [];
+        $statesAbbreviation = [];
+        $statesOrder        = [];
+        foreach ($statesResult as $val) {
+            $states[$val['State']['id']]                       = $val['State']['name'];
+            $statesOrder[$val['State']['id']]                  = $val['State']['id'] == 19 ? '     ' : $val['State']['name']; //rio de janeiro primeiro
+            $statesAbbreviation[$val['State']['abbreviation']] = $val['State']['name'];
+        }
+
+        $keysStates = array_keys($states);
+        array_multisort($statesOrder, SORT_ASC, $states, $keysStates, $statesAbbreviation);
+        $states = array_combine($keysStates, $states);
+
+        //view
+        $this->set('companyPartner', $companyPartner);
         $this->set('course', $course);
         $this->set('recycle',$recycle);
         $this->set('especializado', $especializado);

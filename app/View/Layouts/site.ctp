@@ -135,7 +135,11 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
         <?php //echo $this->element("site/header"); ?>
     <?php //endif;?>
 
-    <?php echo $this->element("site/header-site"); ?>
+    <?php 
+    if (empty($companyPartner)) {
+        echo $this->element("site/header-site");
+    }
+    ?>
 
     <?php echo $this->Session->flash('auth'); ?>
     <?php echo $this->Session->flash(); ?>

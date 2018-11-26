@@ -23,7 +23,7 @@ class OrdersController extends AppController {
     * @return void
     */
 
-    public function payment(){
+    public function payment($sender = null){
         $this->disableCache();
 
         $session_id = $this->__getSessionId();
@@ -50,6 +50,11 @@ class OrdersController extends AppController {
             $subtotal += $cart['Cart']['unitary_value'];
             $discount += $cart['Cart']['unitary_discount'];
         }
+
+        if (!empty($sender)) {
+            $this->set('sender', $sender);
+        }
+        
         $this->set('carts', $carts);
         $this->set('subtotal', $subtotal);
         $this->set('discount', $discount);
@@ -72,7 +77,7 @@ class OrdersController extends AppController {
 
             if($this->PagarMe->transactionSuccess($transaction)){
                 $this->Order->create();
-                $order = $this->__convertPagarMeTransactionToOrder($transaction, $cart_informations);
+                $order = $this->__convertPagarMeTransactionToOrder($transaction, $cart_informations, $this->request->data['Order']['sender']);
 
                 if($this->Order->saveAll($order,['validate'=>'first', 'deep' => true])){
                     $this->Session->delete('user_bag');
@@ -947,7 +952,7 @@ class OrdersController extends AppController {
     }
 
 
-    private function __convertPagarMeTransactionToOrder($pagarme_transaction,$cart_informations){
+    private function __convertPagarMeTransactionToOrder($pagarme_transaction,$cart_informations,$sender){
         $order = [];
         $order['Order']['user_id'] = $this->Auth->user('id');
         
@@ -965,6 +970,7 @@ class OrdersController extends AppController {
         $carts = $this->__getCartsInSession($this->__getSessionId());
         $order['Order']['value'] = 0;
         $order['Order']['value_discount'] = 0;
+        $order['Order']['sender'] = $sender;
         foreach($carts as $cart){
             $order['Order']['value'] += floatval($cart['Cart']['unitary_value']);
             $order['Order']['value_discount'] += floatval($cart['Cart']['unitary_discount']);

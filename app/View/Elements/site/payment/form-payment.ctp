@@ -1,4 +1,10 @@
-<?php echo $this->Form->create('Order',['url' => ['controller'=>'orders','action'=>'payment'], 'id' => 'payment-form']);?>
+<?php
+echo $this->Form->create('Order',['url' => ['controller'=>'orders','action'=>'payment'], 'id' => 'payment-form']);
+
+$sender = (!empty($sender) ? $sender : 'LM');
+echo $this->Form->hidden('Order.sender', ['value' => $sender]);
+?>
+
     <h5>Selecione a forma de pagamento:</h5>
     <div class="radio">
         <label for="paymentMethodCard">

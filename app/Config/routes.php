@@ -39,6 +39,7 @@ Router::connect('/curso-para-taxistas-lei-1246811', array('controller' => 'cours
 Router::connect('/passo-a-passo-para-recuperar-sua-cnh', array('controller' => 'pages', 'action' => 'passoapasso'));
 
 Router::connect('/cursos/:id-:slug/:uf', array('controller' => 'courses', 'action' => 'view'), array('id' => '[0-9]+', 'pass' => ['id', 'slug', 'uf']));
+Router::connect('/cursos/:id-:slug/:uf/:company', array('controller' => 'courses', 'action' => 'landing_page'), array('id' => '[0-9]+', 'pass' => ['id', 'slug', 'uf', 'company']));
 Router::connect('/cursos/:id-:slug', array('controller' => 'courses', 'action' => 'view'), array('id' => '[0-9]+', 'pass' => ['id', 'slug']));
 Router::connect('/cursos', array('controller' => 'courses', 'action' => 'index'));
 

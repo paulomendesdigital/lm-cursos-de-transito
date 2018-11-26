@@ -27,6 +27,8 @@ class CartsController extends AppController {
 
         if ($this->request->is('post')) {            
             $course_id = $this->request->data['Cart']['course_id'];
+            $sender = $this->request->data['Cart']['sender'];
+
             if( !empty($this->request->data['Cart']['course_id']) ){                
                 $this->Cart->Course->Behaviors->load('Containable');
                 $course = $this->__getCourseForCart($this->request->data['Cart']['course_id'],$this->request->data);
@@ -66,7 +68,7 @@ class CartsController extends AppController {
 
                         if ($this->Cart->save($this->request->data)) {
                             //$this->Session->setFlash(__('Curso adicionado com sucesso ao carrinho!'), 'site/popup-success');
-                            return $this->redirect(['controller' => 'orders', 'action' => 'payment', 'manager' => false]);
+                            return $this->redirect(['controller' => 'orders', 'action' => 'payment', $sender, 'manager' => false]);
                         } else {
                             $this->Session->setFlash('Não foi possível adicionar ao carrinho!', 'site/popup-error');
                         }

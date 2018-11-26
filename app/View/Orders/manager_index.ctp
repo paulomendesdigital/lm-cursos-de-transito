@@ -98,6 +98,7 @@
                 <th><?php echo $this->Paginator->sort('user_id',__('Alunos', true)); ?></th>
                 <th><?php echo $this->Paginator->sort('User.cpf',__('CPF', true)); ?></th>
                 <th><?php echo $this->Paginator->sort('created',__('Data da '.$pageTitle, true)); ?></th>
+                <th><?php echo $this->Paginator->sort('sender',__('Vendedor', true)); ?></th>
                 <th><?php echo 'Curso(s)'; ?></th>
                 <th><?php echo 'UF'; ?></th>
                 <th><?php echo 'Cidade'; ?></th>
@@ -125,6 +126,9 @@
                 <?php if ($bolMultiplo) { ?>
                 <tr>
                 <?php } ?>
+                    <td>
+                        <?php echo (!empty($order['Order']['sender']) ? $order['Order']['sender'] : 'LMa'); ?>
+                    </td>
                     <td><?php echo $course['Course']['name']?></td>
                     <td><?php echo isset($course['State']['abbreviation']) ? $course['State']['abbreviation'] : ''?></td>
                     <td><?php echo isset($course['Citie']['name']) ? $course['Citie']['name'] : ''?></td>

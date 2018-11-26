@@ -29,7 +29,10 @@
                     <?php if ($currentCourseState) {?>
                         <div class="row">
                             <div class="col-xs-12">
-                                <?php echo $this->Element('site/course-cart-form', ['course' => $course, 'course_scopes' => $course_scopes, 'currentCourseState' => $currentCourseState]); ?>
+
+                                <?php $sender = 'LM'; ?>
+                            
+                                <?php echo $this->Element('site/course-cart-form', ['course' => $course, 'course_scopes' => $course_scopes, 'currentCourseState' => $currentCourseState, 'sender' => $sender]); ?>
                             </div>
                         </div>
                         <div class="row">

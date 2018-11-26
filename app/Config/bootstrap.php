@@ -201,9 +201,9 @@ Configure::write('Branch','prod');
 
 /*Configuration Of Pagarme*/
 Configure::write('Pagarme',[
-    //'api_key' => 'ak_test_W6xJpNHFL50sOyi9b40I6E9wJEOcbe',
-    //'encryption_key' => 'ek_test_vZECuesBG6lMV0KNdNPIYJePaLtJPK',
-    //'postback_url' => Configure::read('Branch') == 'dev' ? 'https://requestb.in/zstw3vzs' : Router::url(array('controller'=>'orders','action'=>'postback_pagarme','prefixes'=>false),true)
+    // 'api_key' => 'ak_test_5sjAIEQpyzBJvuANxgvWsgjHY5s8hl',
+    // 'encryption_key' => 'ek_test_N93uHSeUWDzNcg7W6oSs8KMzvSNA9l',
+    // 'postback_url' => Configure::read('Branch') == 'dev' ? 'https://requestb.in/zstw3vzs' : Router::url(array('controller'=>'orders','action'=>'postback_pagarme','prefixes'=>false),true)
     'api_key' => 'ak_live_0vz1gyusrf0JRCmacvythVEoaVqCds',
     'encryption_key' => 'ek_live_jYE80z3OKPnAYOVcCdAmsOY69VmOGb',
     'postback_url' => 'https://lmcursosdetransito.com.br/orders/postback_pagarme'

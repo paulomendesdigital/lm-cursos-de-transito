@@ -36,7 +36,7 @@
         <?php } ?>
 
         <div id="additional-form-container" class="row-form-element">
-            <?php echo $this->Element('site/course-cart-additional-form'); ?>
+            <?php echo $this->Element('site/course-cart-additional-form', ['sender' => $sender]); ?>
         </div>
     </div>
     <div class="box">

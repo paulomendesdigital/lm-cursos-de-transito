@@ -70,6 +70,7 @@ if (!$stateActive) {?>
     <?php } elseif ($recycle && $state_id == 16) { //CURSO DE RECICLAGEM DE PARANÁ  ?>
         <div id="additional-form">
             <p>Preencha o formulário abaixo para validar a sua matrícula.</p>
+            <?php echo $this->Form->hidden('Cart.sender', ['value' => $sender]); ?>
             <?php if (isset($user) && $user) { ?>
                 <?php echo $this->Form->hidden('Cart.cpf', ['value' => $user['cpf']]); ?>
                 <div class="form-element">

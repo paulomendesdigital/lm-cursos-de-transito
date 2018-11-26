@@ -1459,7 +1459,8 @@ UNLOCK TABLES;
 /*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'NO_AUTO_VALUE_ON_ZERO' */ ;
-DELIMITER ;;
+DROP PROCEDURE IF EXISTS `pr_criar_sumario_estudo_usuario`;
+DELIMITER |
 CREATE DEFINER=`app_user`@`%` PROCEDURE `pr_criar_sumario_estudo_usuario`(IN user_id INT, IN order_id INT)
     COMMENT 'Liberação de grade para o curso comprado'
 BEGIN
@@ -1486,7 +1487,8 @@ BEGIN
       SET x_summaries_id = (SELECT id FROM user_module_summaries WHERE user_id = user_id AND order_id = order_id ORDER BY id ASC LIMIT 0,1);
       UPDATE user_module_summaries SET desblock = 1 WHERE id = x_summaries_id;
    END IF;
-END ;;
+END
+|
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
