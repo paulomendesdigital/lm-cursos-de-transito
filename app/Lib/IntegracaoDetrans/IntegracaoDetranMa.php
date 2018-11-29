@@ -12,10 +12,10 @@ App::uses('CourseType', 'Model');
 class IntegracaoDetranMa extends IntegracaoBase
 {
     //HOMOLOGAÇÃO
-    const URL_WEBSERVICE_CERTIFICADO = 'http://wsdesenwebapp.detran.ma.gov.br:10010/wsstack/services/wsRegistroCursoEAD_dsv?wsdl';
+    // const URL_WEBSERVICE_CERTIFICADO = 'http://wsdesenwebapp.detran.ma.gov.br:10010/wsstack/services/wsRegistroCursoEAD_dsv?wsdl';
 
     //PRODUÇÃO
-    // const URL_WEBSERVICE_CERTIFICADO = 'http://wsprodwebapp.detran.ma.gov.br:10010/wsstack/services/wsRegistroCursoEAD?wsdl';
+    const URL_WEBSERVICE_CERTIFICADO = 'http://wsprodwebapp.detran.ma.gov.br:10010/wsstack/services/wsRegistroCursoEAD?wsdl';
 
     const USUARIO_WEBSERVICE = 'LMCTRANSITO';
     const SENHA_WEBSERVICE   = 'LMCT#92018';
