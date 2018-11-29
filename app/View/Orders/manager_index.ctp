@@ -127,7 +127,7 @@
                 <tr>
                 <?php } ?>
                     <td>
-                        <?php echo (!empty($order['Order']['sender']) ? $order['Order']['sender'] : 'LMa'); ?>
+                        <?php echo (!empty($order['Order']['sender']) ? $order['Order']['sender'] : 'LM'); ?>
                     </td>
                     <td><?php echo $course['Course']['name']?></td>
                     <td><?php echo isset($course['State']['abbreviation']) ? $course['State']['abbreviation'] : ''?></td>
