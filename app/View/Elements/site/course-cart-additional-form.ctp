@@ -70,7 +70,9 @@ if (!$stateActive) {?>
     <?php } elseif ($recycle && $state_id == 16) { //CURSO DE RECICLAGEM DE PARANÁ  ?>
         <div id="additional-form">
             <p>Preencha o formulário abaixo para validar a sua matrícula.</p>
+
             <?php echo $this->Form->hidden('Cart.sender', ['value' => $sender]); ?>
+            
             <?php if (isset($user) && $user) { ?>
                 <?php echo $this->Form->hidden('Cart.cpf', ['value' => $user['cpf']]); ?>
                 <div class="form-element">
@@ -102,6 +104,21 @@ if (!$stateActive) {?>
                 <?php echo $this->Form->input('Cart.cnh', ['div' => false, 'label' => false, 'required' => true, 'minlength' => 5, 'maxlength' => 11, 'data-msg-required' => 'Digite o número da CNH.']); ?>
             </div>
 
+        </div>
+    <?php } elseif ($recycle && $state_id == 10) { //CURSO DE RECICLAGEM DE MARANHAO  ?>
+        <div id="additional-form">
+            <?php if (isset($user) && $user) { ?>
+                <?php echo $this->Form->hidden('Cart.cpf', ['value' => $user['cpf']]); ?>
+                <div class="form-element">
+                    <label>CPF<span class="required">*</span></label>
+                    <input type="text" value="<?php echo $user['cpf'] ?>" disabled>
+                </div>
+            <?php } else { ?>
+                <div class="form-element">
+                    <label>CPF<span class="required">*</span></label>
+                    <?php echo $this->Form->input('Cart.cpf', ['div' => false, 'label' => false, 'required' => true, 'maxlength' => 20, 'data-mask' => 'cpf', 'data-msg-required' => 'Digite o seu CPF.', 'data-rule-cpfbr="true"']); ?>
+                </div>
+            <?php } ?>
         </div>
     <?php }
 } ?>

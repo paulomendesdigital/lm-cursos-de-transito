@@ -432,6 +432,11 @@ class IntegracaoDetransService
             } elseif ($courseTypeId == CourseType::RECICLAGEM && $stateId == State::PARANA) {
                 App::uses('IntegracaoDetranPr', 'IntegracaoDetrans');
                 return new IntegracaoDetranPr($this->origem);
+	
+            //CURSOS DE RECICLAGEM MARANHÃO
+            } elseif ($courseTypeId == CourseType::RECICLAGEM && $stateId == State::MARANHAO) {
+                App::uses('IntegracaoDetranMa', 'IntegracaoDetrans');
+                return new IntegracaoDetranMa($this->origem);
 
             //CURSOS DE RECICLAGEM OU ESPECIALIZADOS DE OUTROS ESTADOS
             } elseif ($courseTypeId == CourseType::RECICLAGEM || $courseTypeId == CourseType::ESPECIALIZADOS) {

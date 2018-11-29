@@ -173,6 +173,9 @@
             } else if (state_id == 16) {
                 $('.input-cpf,.input-cnh,.input-birth').attr('required', true);
                 $('.input-renach,.input-cnh_category,.input-birth').attr('required', false);
+            } else if (state_id == 10) { //MA
+                $('.input-cpf').attr('required', true);
+                $('.input-renach,.input-cnh_category').attr('required', false);
             }
         } else {
             $('.input-cpf,.input-renach,.input-cnh_category').attr('required', false);
@@ -184,7 +187,7 @@
         var course_type_id = coursesType[$('.input-course').val()];
         var state_id       = $('.input-state').val();
 
-        if (course_type_id == 3 && state_id != 19 && state_id != 26 && state_id != 2 && state_id != 16) {
+        if (course_type_id == 3 && state_id != 19 && state_id != 26 && state_id != 2 && state_id != 16 && state_id != 10) {
             return confirm("Este curso ainda não está integrado ao estado selecionado. Deseja continuar?");
         } else {
             return true;
