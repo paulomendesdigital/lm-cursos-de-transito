@@ -1,4 +1,7 @@
 <?php
+
+echo $this->Form->hidden('Cart.sender', ['value' => $sender]);
+
 if (!$stateActive) {?>
     <p class="only_school"><strong>Este curso ainda não está disponível no seu estado. </strong></p>
     <p>Clique em <a href="javascript:smartsupp('chat:open');">Fale Conosco</a> para maiores informações.</p>
@@ -70,8 +73,6 @@ if (!$stateActive) {?>
     <?php } elseif ($recycle && $state_id == 16) { //CURSO DE RECICLAGEM DE PARANÁ  ?>
         <div id="additional-form">
             <p>Preencha o formulário abaixo para validar a sua matrícula.</p>
-
-            <?php echo $this->Form->hidden('Cart.sender', ['value' => $sender]); ?>
             
             <?php if (isset($user) && $user) { ?>
                 <?php echo $this->Form->hidden('Cart.cpf', ['value' => $user['cpf']]); ?>
@@ -119,6 +120,41 @@ if (!$stateActive) {?>
                     <?php echo $this->Form->input('Cart.cpf', ['div' => false, 'label' => false, 'required' => true, 'maxlength' => 20, 'data-mask' => 'cpf', 'data-msg-required' => 'Digite o seu CPF.', 'data-rule-cpfbr="true"']); ?>
                 </div>
             <?php } ?>
+        </div>
+
+    <?php } elseif ($recycle && $state_id == 9) { //CURSO DE RECICLAGEM GOIÁS ?>
+        <div id="additional-form">
+            <div class="form-element">
+                <label>Tipo de Reciclagem<span class="required">*</span></label>
+                <?php echo $this->Form->input('Cart.tipo_reciclagem', ['div' => false, 'label' => false, 'required' => true, 'options' => ['' => '', '1' => 'Reciclagem Preventiva', '2' => 'Reciclagem Infrator'], 'data-msg-required' => 'Digite o seu RENACH.']); ?>
+            </div>
+            <?php if (isset($user) && $user) { ?>
+                <?php echo $this->Form->hidden('Cart.cpf', ['value' => $user['cpf']]); ?>
+                <div class="form-element">
+                    <label>CPF<span class="required">*</span></label>
+                    <input type="text" value="<?php echo $user['cpf'] ?>" disabled>
+                </div>
+            <?php } else { ?>
+                <div class="form-element">
+                    <label>CPF<span class="required">*</span></label>
+                    <?php echo $this->Form->input('Cart.cpf', ['div' => false, 'label' => false, 'required' => true, 'maxlength' => 20, 'data-mask' => 'cpf', 'data-msg-required' => 'Digite o seu CPF.', 'data-rule-cpfbr="true"']); ?>
+                </div>
+            <?php } ?>
+            <div class="form-element">
+                <label>RENACH<span class="required">*</span></label>
+                <?php echo $this->Form->input('Cart.renach', ['div' => false, 'label' => false, 'required' => true, 'placeholder' => 'GO999999999', 'minlength' => 11, 'maxlength' => 11, 'style' => 'text-transform: uppercase;', 'data-msg-required' => 'Digite o seu RENACH.']); ?>
+            </div>
+            <div class="form-element">
+                <label>Registro CNH<span class="required">*</span></label>
+                <?php echo $this->Form->input('Cart.cnh', ['div' => false, 'label' => false, 'required' => true, 'placeholder' => '', 'minlength' => 11, 'maxlength' => 11, 'style' => 'text-transform: uppercase;', 'data-msg-required' => 'Digite o número da CNH.']); ?>
+            </div>
+            <div class="form-element">
+                <label>Categoria da CNH<span class="required">*</span>
+                    <a class="btn btn-default btn-xs" data-toggle="modal" data-target="#modalCategoria" href='javascript:void(0)'><i class="glyphicon glyphicon-question-sign" aria-hidden="true"></i></a>
+                </label>
+                <?php echo $this->Form->input('Cart.cnh_category', ['div' => false, 'empty' => 'Selecione', 'options' => $cnh_categories, 'label' => false, 'required' => true, 'data-msg' => 'Selecione a categoria.']); ?>
+                <p>Selecione a categoria da sua habilitação.</p>
+            </div>
         </div>
     <?php }
 } ?>

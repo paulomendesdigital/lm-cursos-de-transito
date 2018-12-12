@@ -25,6 +25,8 @@ class LogDetransController extends AppController
         $arrIntegracoes = [
             'IntegracaoDetranAl' => 'DETRAN-AL',
             'IntegracaoDetranPr' => 'DETRAN-PR',
+            'IntegracaoDetranGo' => 'DETRAN-GO',
+            'IntegracaoDetranMa' => 'DETRAN-MA',
             'IntegracaoDetranRj' => 'DETRAN-RJ',
             'IntegracaoDetranSe' => 'DETRAN-SE',
         ];

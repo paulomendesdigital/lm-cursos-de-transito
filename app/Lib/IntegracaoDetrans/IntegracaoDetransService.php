@@ -437,6 +437,11 @@ class IntegracaoDetransService
             } elseif ($courseTypeId == CourseType::RECICLAGEM && $stateId == State::MARANHAO) {
                 App::uses('IntegracaoDetranMa', 'IntegracaoDetrans');
                 return new IntegracaoDetranMa($this->origem);
+            
+            //CURSOS DE RECICLAGEM GOIÁS
+            } elseif ($courseTypeId == CourseType::RECICLAGEM && $stateId == State::GOIAS) {
+                App::uses('IntegracaoDetranGo', 'IntegracaoDetrans');
+                return new IntegracaoDetranGo($this->origem);
 
             //CURSOS DE RECICLAGEM OU ESPECIALIZADOS DE OUTROS ESTADOS
             } elseif ($courseTypeId == CourseType::RECICLAGEM || $courseTypeId == CourseType::ESPECIALIZADOS) {
@@ -483,7 +488,7 @@ class IntegracaoDetransService
 
         $result = $objOrderCourseModel->find('first', [
             'conditions' => ['OrderCourse.order_id' => $orderId, 'OrderCourse.course_id' => $courseId],
-            'fields' => ['id', 'order_id', 'course_id', 'citie_id', 'state_id', 'status_detran_id', 'codigo_retorno_detran', 'mensagem_retorno_detran', 'data_matricula_detran', 'retry_count_detran', 'renach', 'cnh', 'cnh_category'],
+            'fields' => ['id', 'order_id', 'course_id', 'citie_id', 'state_id', 'status_detran_id', 'codigo_retorno_detran', 'mensagem_retorno_detran', 'data_matricula_detran', 'retry_count_detran', 'renach', 'cnh', 'cnh_category', 'tipo_reciclagem'],
             'contain' => [
                 'Course' => [
                     'fields' => ['id', 'course_type_id', 'detran_validation', 'max_time', 'course_code_id'],

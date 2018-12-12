@@ -90,6 +90,7 @@ class Cart extends AppModel {
 			'state_id' => isset($course['Cart']['state_id']) ? $course['Cart']['state_id'] : null,
 			'citie_id' => isset($course['Cart']['citie_id']) ? $course['Cart']['citie_id'] : null,
 			'sessionid' => $sessionid,
+			'tipo_reciclagem' => isset($course['Cart']['tipo_reciclagem']) ? $course['Cart']['tipo_reciclagem'] : null,
             'cnh' => isset($course['Cart']['cnh']) ? $course['Cart']['cnh'] : null,
             'renach' => isset($course['Cart']['renach']) ? strtoupper($course['Cart']['renach']) : null,
             'cnh_category' => isset($course['Cart']['cnh_category']) ? strtoupper($course['Cart']['cnh_category']) : null

@@ -4,6 +4,8 @@
  * Course View
  *
 */ ?>
+<?php $btnAnswer = ($btnAnswer ? $btnAnswer : 'Responder Agora'); ?>
+
 <?php echo $this->Html->script('jQuery-plugin-progressbar');?>
 <div class="container">
    <div class="page-section">
@@ -52,8 +54,6 @@
               
               <?php if( $course['Course']['avaliation']['show_certificate'] ):?>
                 <?php
-                
-                $btnAnswer = ($btnAnswer ? $btnAnswer : 'Responder Agora');
 
                 echo $this->Element('site/lms/pesquisa-avaliacao-curso', ['course'=>$course,'btnAnswer'=>$btnAnswer,'modules'=>$modules, 'poll'=>$poll]);
                 ?>

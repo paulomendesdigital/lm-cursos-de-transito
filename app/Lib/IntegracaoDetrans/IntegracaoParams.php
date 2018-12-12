@@ -20,6 +20,7 @@ class IntegracaoParams
     public $data_matricula_detran;
     public $cod_cfc;
     public $birth;
+    public $tipo_reciclagem;
 
     //crédito de aula
     public $course_code;

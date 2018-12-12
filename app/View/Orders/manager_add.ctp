@@ -70,6 +70,16 @@
                     <div class="col-md-6 col-sm-12 col-xs-12">
                         <?php echo $this->Form->input('OrderCourse.0.course_id', array('type' => 'select','class' => 'input-course form-control', 'options' => $courses, 'empty' => 'Selecione o curso', 'required'=>true,'onchange'=>'courseChange(this, \'OrderCourse\', 0)')); ?>
                     </div>
+
+                    <div class="col-md-6">
+                        <?php
+                        echo $this->Form->input('value', array('class' => 'form-control', 'type' => 'number', 'label'=> ['text' => __('price'), 'class' => 'col-sm-2 control-label text-right'], 'divControls' => ['class' => 'col-sm-10']));
+                        ?>
+                    </div>
+
+                    <div class="col-md-6 col-sm-12 col-xs-12 col-tipo_reciclagem" style="display: none">
+                        <?php echo $this->Form->input('OrderCourse.0.tipo_reciclagem', array('class'=>'input-tipo_reciclagem form-control', 'options' => ['' => '', '1' => 'Reciclagem Preventiva', '2' => 'Reciclagem Infrator'], 'label'=>__('Tipo Reciclagem')));?>
+                    </div>
                 </div>
 
                 <div class="row">

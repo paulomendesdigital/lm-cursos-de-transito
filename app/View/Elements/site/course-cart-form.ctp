@@ -1,3 +1,5 @@
+<?php $sender = (!empty($sender) ? $sender : 'LM'); ?>
+
 <div class="buy-section<?php echo isset($class) ? ' ' . $class : ''?>">
     <?php echo $this->Form->create('Cart',['id' => 'cart-form', 'class' => 'cart-form', 'url' => ['controller'=>'carts','action'=>'add']]); ?>
     <?php echo $this->Form->input('course_id',['type'=>'hidden','data-toggle'=>'course-id-input', 'value'=>$course['Course']['id']]); ?>
