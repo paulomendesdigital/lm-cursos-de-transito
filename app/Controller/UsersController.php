@@ -466,6 +466,171 @@ class UsersController extends AppController {
     }
 
     ############################ // ############################# // ##############################
+    
+    /**
+    * PARCEIROS
+    * @return void
+    */
+    public function manager_partners() {
+        
+        $group_id = $this->User->Group->getParceiro();
+        $titlePage = $this->User->getTitlePage('index', $group_id);
+        $action_add = 'add_partner';
+        $action_edit = 'edit_partner';
+
+        $this->Filter->addFilters(
+            array(
+                'filterId' => array(
+                    'User.id' => array(
+                        'operator' => '=',
+                        'value' => array(
+                            'before' => '', 
+                            'after'  => ''  
+                        )
+                    )
+                ),
+                'filterName' => array(
+                    'User.name' => array(
+                        'operator' => 'LIKE',
+                        'value' => array(
+                            'before' => '%', 
+                            'after'  => '%'  
+                        )
+                    )
+                ),
+                'filterCpf' => array(
+                    'User.cpf' => array(
+                        'operator' => 'LIKE',
+                        'value' => array(
+                            'before' => '%', 
+                            'after'  => '%'  
+                        )
+                    )
+                ),
+                'filterStatus' => array(
+                    'User.status' => array(
+                        'select' => ['' => 'Status', 0 => 'Inativo', 1 => 'Ativo']
+                    )
+                )
+            )
+        );
+
+        $conditions = array('User.group_id'=>$group_id);
+
+        if( $this->Filter->getConditions() ){
+            $conditions = \Hash::merge($conditions, $this->Filter->getConditions());
+        }
+
+        $this->Filter->setPaginate('order', 'User.id ASC'); // optional
+        $this->Filter->setPaginate('limit', Configure::read('ResultPage')); // optional
+
+        // Define conditions
+        $this->Filter->setPaginate('conditions', $conditions);
+
+        $this->User->recursive = 0;
+        $users = $this->Paginator->paginate();
+        
+        $this->set(compact('users','titlePage','group_id','action_add','action_edit'));
+        $this->render('manager_index');
+    }
+
+    /**
+    * PARCEIROS
+    * @return void
+    */
+    public function manager_add_partner($group_id=Group::PARCEIRO){
+
+        $group_id = Group::PARCEIRO;
+        $action = $this->User->getActionReturn($group_id);
+        $titlePage = $this->User->getTitlePage('add',$group_id);
+
+        if (strpos($this->referer(), 'partners/add') !== false) {
+            $this->Session->write('redirect_partner', $this->referer());
+        }
+
+        if ($this->request->is('post')) {
+            
+            $this->request->data['Partner'][0]['name']   = $this->request->data['User']['name'];
+            $this->request->data['Partner'][0]['status'] = $this->request->data['User']['status'];
+
+            $this->request->data['User']['username'] = $this->request->data['User']['cpf'];
+            $this->request->data['User']['password'] = $this->User->__setPasswordPartner($this->request->data['User']['username']);
+
+            $this->User->create();
+
+            if ($this->User->saveAll($this->request->data, ['deep'=>true])) {
+                $this->Session->setFlash(__('The has been saved.'), 'manager/success');
+                if ($this->Session->read('redirect_partner')) {
+                    $this->Session->delete('redirect_partner');
+                    return $this->redirect(['controller' => 'partners', 'action' => 'add', 'manager' => true, $this->User->id]);
+                } else {
+                    if (isset($this->request->data['aplicar'])) {
+                        return $this->redirect($this->referer());
+                    }
+                    return $this->redirect(array('action' => $action, 'manager' => true));
+                }
+            } else {
+                $this->Session->setFlash(__('The could not be saved. Please, try again.'), 'manager/error');
+            }
+        }
+
+        $this->request->data['User']['status'] = $this->request->data['User']['newsletter'] = 1;
+
+        $this->set('cnh_categories', $this->getCnhCategoriesList());
+
+        $this->set(compact('group_id','titlePage','action'));
+    }
+
+    /**
+    * PARCEIROS
+    * @return void
+    */
+    public function manager_edit_partner($id = null) {
+        
+        $group_id = Group::PARCEIRO;
+        $action = $this->User->getActionReturn($group_id);
+        $titlePage = $this->User->getTitlePage('edit',$group_id);
+        $groupName = $this->User->Group->getGroup($group_id);
+
+        if (!$this->User->exists($id)) {
+            throw new NotFoundException(__('Invalid user'));
+        }
+
+        if ($this->request->is(array('post', 'put'))) {
+            
+            $this->request->data['User']['username']     = $this->request->data['User']['cpf'];
+            $this->request->data['Partner'][0]['name']   = $this->request->data['User']['name'];
+            $this->request->data['Partner'][0]['status'] = $this->request->data['User']['status'];
+            
+            if ($this->User->saveAll($this->request->data, ['deep'=>true])) {
+                $this->Session->setFlash(__('The has been saved.'), 'manager/success');
+                if(isset($this->request->data['aplicar'])){
+                    return $this->redirect($this->referer());
+                }
+                return $this->redirect(array('action'=> $action,'manager'=>true));
+            } else {
+                $this->Session->setFlash(__('The could not be saved. Please, try again.'), 'manager/error');
+            }
+        } else {
+            $options = [
+                'conditions' => ['User.id' => $id],
+            ];
+            $this->User->Behaviors->load('Containable');
+            $this->request->data = $this->User->find('first', $options);
+
+            if( !empty($this->request->data['Partner'][0]['state_id']) ){
+                $this->set('cities', $this->User->Partner->City->find('list',['conditions'=>['City.state_id'=>$this->request->data['Partner'][0]['state_id']]]));
+            }
+        }
+
+        $states = $this->User->Partner->State->find('list', array('fields' => array('id', 'name'), 'order' => 'State.name ASC'));
+
+        $this->set('cnh_categories', $this->getCnhCategoriesList());
+
+        $this->set(compact('group_id','titlePage','action','groupName','states'));
+    }
+
+    ############################ // ############################# // ##############################
 
     /**
     * operadores
@@ -837,6 +1002,30 @@ class UsersController extends AppController {
                 }
                 return $this->redirect($this->Auth->redirect());
             }
+            $this->Session->setFlash(__('Your username or password was incorrect.'), 'site/error');
+        }
+    }
+
+    public function login_partner() {
+
+        if ($this->Auth->user()):
+            return $this->redirect(array('controller' => 'pages', 'action' => 'index', 'manager' => false));
+        endif;
+        
+        if ($this->request->is('post')) {
+
+            if ($this->Auth->login()) {
+                
+                $this->Session->write('partner',true);
+
+                $this->Auth->loginRedirect = array(
+                    'controller' => 'minhas-vendas',
+                    'action' => 'index',
+                    'school' => false,
+                );
+                return $this->redirect($this->Auth->redirect());
+            }
+            die;
             $this->Session->setFlash(__('Your username or password was incorrect.'), 'site/error');
         }
     }

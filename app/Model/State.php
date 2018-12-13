@@ -11,11 +11,12 @@ App::uses('AppModel', 'Model');
  */
 class State extends AppModel {
 
-	CONST ALAGOAS        = 2;
-	CONST MARANHAO       = 10;
-    CONST PARANA         = 16;
-    CONST RIO_DE_JANEIRO = 19;
-    CONST SERGIPE        = 26;
+	CONST ALAGOAS			= 2;
+	CONST PARANA			= 16;
+	CONST MARANHAO			= 10;
+	CONST GOIAS				= 9;
+	CONST RIO_DE_JANEIRO	= 19;
+	CONST SERGIPE			= 26;
 
 /**
  * Validation rules

@@ -13,6 +13,7 @@ class Group extends AppModel {
 	CONST OPERADOR = 3;
 	CONST ALUNO = 4;
 	CONST TUTOR = 5;
+	CONST PARCEIRO = 6;
 /**
  * Validation rules
  *
@@ -65,7 +66,8 @@ class Group extends AppModel {
             self::ADMINISTRADOR => "Administrador",
             self::INSTRUTOR  	=> "Instrutor",
             self::OPERADOR      => "Operador",
-            self::ALUNO         => "Aluno",
+			self::ALUNO         => "Aluno",
+			self::PARCEIRO		=> "Parceiro",
             self::TUTOR         => "Tutor"
         );
     }
@@ -92,6 +94,10 @@ class Group extends AppModel {
 
 	public function getAluno(){
         return self::ALUNO;
+	}
+
+	public function getParceiro(){
+        return self::PARCEIRO;
 	}
 
 	public function getGroup($group_id=1){

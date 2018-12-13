@@ -51,7 +51,13 @@
 					</div>
 				</div>
 				<div class='row-form-element'>
-					<?php echo $this->Html->link('SALA VIRTUAL',['controller'=>'virtual_rooms','action'=>'index'],['class'=>'btn btn-block btn-success btn-sw']);?>
+					<?php
+					if (!empty($this->Session->read('partner'))) {
+						echo $this->Html->link('MINHAS VENDAS',['controller'=>'partners','action'=>'index'],['class'=>'btn btn-block btn-success btn-sw']);
+					} else {
+						echo $this->Html->link('SALA VIRTUAL',['controller'=>'virtual_rooms','action'=>'index'],['class'=>'btn btn-block btn-success btn-sw']);
+					}
+					?>
                     <br>
                     <?php echo $this->Html->link('Sair',['controller'=>'users','action'=>'logout', '?' => 'home']);?>
 				</div>

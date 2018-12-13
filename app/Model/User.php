@@ -134,6 +134,19 @@ class User extends AppModel {
 			'finderQuery' => '',
 			'counterQuery' => ''
 		),
+		'Partner' => array(
+			'className' => 'Partner',
+			'foreignKey' => 'user_id',
+			'dependent' => true,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
 		'Manager' => array(
 			'className' => 'Manager',
 			'foreignKey' => 'user_id',
@@ -369,6 +382,7 @@ class User extends AppModel {
 				case $this->Group->getProfessor(): return 'Professores';
 				case $this->Group->getOperador(): return 'Operadores';
 				case $this->Group->getAluno(): return 'Alunos';
+				case $this->Group->getParceiro(): return 'Parceiros';
 				default: return 'Usuários';
 			}
 		}else{
@@ -377,6 +391,7 @@ class User extends AppModel {
 				case $this->Group->getProfessor(): return 'Professor';
 				case $this->Group->getOperador(): return 'Operador';
 				case $this->Group->getAluno(): return 'Aluno';
+				case $this->Group->getParceiro(): return 'Parceiro';
 				default: return 'Usuário';
 			}
 		}
@@ -388,6 +403,7 @@ class User extends AppModel {
 			case $this->Group->getProfessor(): return 'instructors';
 			case $this->Group->getOperador(): return 'operators';
 			case $this->Group->getAluno(): return 'students';
+			case $this->Group->getParceiro(): return 'partners';
 			default: return 'users';
 		}
 	}
@@ -445,8 +461,21 @@ class User extends AppModel {
                 //'UserQuestion' => ['Module' => ['fields' => ['name']],'Course' => ['fields' => ['name']] ],
         ]);
 	}
+	public function getViewParceiro(){
+		$this->contain([
+                'Group',
+                'Partner'=>['fields' => ['address', 'number', 'neighborhood'], 'City', 'State'],
+                //'UserModuleLog' => ['Module' => ['fields' => ['name']],'ModuleDiscipline' => ['fields' => ['name']] ],
+                //'UserModuleSummary' => ['Module' => ['fields' => ['name']],'ModuleDiscipline' => ['fields' => ['name']] ],
+                //'UserQuestion' => ['Module' => ['fields' => ['name']],'Course' => ['fields' => ['name']] ],
+        ]);
+	}
 
 	public function __setPasswordStudent($string=''){
+        return substr(str_replace('-', '', str_replace('.', '', $string)),-4);
+    }
+
+	public function __setPasswordPartner($string=''){
         return substr(str_replace('-', '', str_replace('.', '', $string)),-4);
     }
 
@@ -500,6 +529,29 @@ class User extends AppModel {
         ]);
 
         $this->Student->validate = array_merge($this->Student->validate, [
+            'cellphone' => [
+                'notempty' => [
+                    'rule'    => 'notempty',
+                    'message' => 'Este campo é obrigatório.',
+                ],
+                'valido' => [
+                    'rule'    => ['validationTelefone'],
+                    'message' => 'Telefone ou Celular Inválido'
+                ],
+            ],
+            'birth' => [
+                'notempty' => [
+                    'rule'    => 'notempty',
+                    'message' => "Preencha a Data de Nascimento",
+                ],
+                'dataValida' => [
+                    'rule'    => ['date', 'dmy'],
+                    'message' => 'Data de Nascimento inválida.'
+                ],
+            ]
+        ]);
+
+        $this->Partner->validate = array_merge($this->Partner->validate, [
             'cellphone' => [
                 'notempty' => [
                     'rule'    => 'notempty',

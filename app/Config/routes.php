@@ -35,6 +35,7 @@ Router::connect('/parceria', array('controller' => 'pages', 'action' => 'partner
 Router::connect('/nossa-equipe', array('controller' => 'instructors', 'action' => 'index'));
 Router::connect('/recuperar-senha', array('controller' => 'users', 'action' => 'pass'));
 Router::connect('/acesso-aluno', array('controller' => 'users', 'action' => 'login'));
+Router::connect('/acesso-parceiro', array('controller' => 'users', 'action' => 'login_partner'));
 Router::connect('/curso-para-taxistas-lei-1246811', array('controller' => 'courses', 'action' => 'view', 1,'curso-para-taxistas-lei-1246811'));
 Router::connect('/passo-a-passo-para-recuperar-sua-cnh', array('controller' => 'pages', 'action' => 'passoapasso'));
 
@@ -71,6 +72,9 @@ Router::connect('/biometria/*', array('controller' => 'virtual_rooms', 'action' 
 Router::connect('/biometria-facial/*', array('controller' => 'virtual_rooms', 'action' => 'biometria_facial'));
 Router::connect('/atendimento/:action', array('controller' => 'virtual_rooms', 'action' => 'contact_us'));
 Router::connect('/school/atendimento/contact_us', array('controller' => 'virtual_rooms', 'action' => 'school_contact_us'));
+
+//PARTNERS
+Router::connect('/minhas-vendas', array('controller' => 'partners', 'action' => 'index'));
 
 
 Router::connect('/foruns/:action/*', array('controller' => 'virtual_room_forums', 'action' => 'index'));

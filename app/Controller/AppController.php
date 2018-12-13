@@ -156,7 +156,7 @@ class AppController extends Controller {
 			'Form' => array(
 				'scope' => array(
 					'User.status' => 1, 
-					'User.group_id' => Group::ALUNO,
+					'User.group_id' => [Group::ALUNO,Group::PARCEIRO],
 					'User.school_id IS NOT NULL'
 				),
 			),
@@ -247,7 +247,7 @@ class AppController extends Controller {
 
 			$this->Auth->authenticate = array(
 				'Form' => array(
-					'scope' => array('User.status' => 1, 'User.group_id' => Group::ALUNO),
+					'scope' => array('User.status' => 1, 'User.group_id' => [Group::ALUNO,Group::PARCEIRO]),
 				),
 			);
 
@@ -1817,7 +1817,7 @@ class AppController extends Controller {
         $this->Cart->Behaviors->load('Containable');
         $this->Cart->recursive = -1;
         $carts = $this->Cart->find('all',[
-            'fields' => ['Cart.id','Cart.course_id','Cart.state_id','Cart.citie_id','Cart.unitary_value','Cart.unitary_discount', 'Cart.renach', 'Cart.cnh', 'Cart.cnh_category'],
+            'fields' => ['Cart.id','Cart.course_id','Cart.state_id','Cart.citie_id','Cart.unitary_value','Cart.unitary_discount', 'Cart.renach', 'Cart.cnh', 'Cart.cnh_category', 'Cart.tipo_reciclagem'],
             'contain' => [
                 'State' => ['fields' => ['id', 'name', 'abbreviation']],
                 'City'  => ['fields' => ['id', 'name']],
