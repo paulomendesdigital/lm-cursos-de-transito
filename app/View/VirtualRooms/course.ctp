@@ -4,7 +4,7 @@
  * Course View
  *
 */ ?>
-<?php $btnAnswer = ($btnAnswer ? $btnAnswer : 'Responder Agora'); ?>
+<?php $btnAnswer = (!empty($btnAnswer) ? $btnAnswer : 'Responder Agora'); ?>
 
 <?php echo $this->Html->script('jQuery-plugin-progressbar');?>
 <div class="container">
