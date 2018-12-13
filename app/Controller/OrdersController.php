@@ -701,9 +701,9 @@ class OrdersController extends AppController {
                 $cart   = ['Cart' => $this->request->data['OrderCourse'][0]];
                 $course = $this->__getCourseForCart($cart['Cart']['course_id'], $cart);
 
-                if (isset($course['Course']['promotional_price']) && !empty($course['Course']['promotional_price'])) {
+                if (!empty($course['Course']['promotional_price']) && empty($this->request->data['Order']['value'])) {
                     $this->request->data['Order']['value'] = $course['Course']['promotional_price'];
-                } elseif (isset($course['Course']['price']) && !empty($course['Course']['price'])) {
+                } elseif (!empty($course['Course']['price']) && empty($this->request->data['Order']['value'])) {
                     $this->request->data['Order']['value'] = $course['Course']['price'];
                 }
             }
