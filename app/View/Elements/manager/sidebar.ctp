@@ -125,6 +125,11 @@
 				</ul>
 			</li>
 
+			<!-- ### NOTAS DE SERVIÇOS ###-->
+			<li class="<?php echo \Hash::inArray($this->params['controller'], ['course_states','course_types']) ? 'active' :''; ?>">
+				<?php echo $this->Html->link('<span>Notas Serviços</span> <i class="icon-barcode"></i>', array('controller' => 'invoices', 'action' => 'index'), array('escape' => false));?>
+			</li>
+
             <!-- ### CUPONS DE DESCONTO ###-->
             <li class="<?php echo in_array($this->params['controller'], ['tickets']) ? 'active' : ''; ?>">
                 <?php echo $this->Html->link('<span>Cupons de Desconto</span> <i class="icon-tag4"></i>', array('controller' => 'tickets', 'action' => 'index'),array('escape'=>false));?>

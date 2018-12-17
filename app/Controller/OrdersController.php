@@ -1,5 +1,6 @@
 <?php
 App::uses('AppController', 'Controller');
+App::import('Controller', 'Invoices');
 /**
  * @copyright Copyright 2018
  * @author Dayvison Silva - www.lmcursosdetransito.com.br
@@ -153,12 +154,13 @@ class OrdersController extends AppController {
             //$this->sendEmailLogPostback();
             
             if( $this->__IsPostbackBoleto() ){
-
+                
                 $this->__UpdateStatusBoleto();
 
             }else{
 
                 if( $this->PagarMe->validatePostback(file_get_contents("php://input"),$this->request->header('X-Hub-Signature')) ){
+                    
                     $this->loadModel('Order');
                     $postback = $this->request->data;
 
@@ -168,11 +170,55 @@ class OrdersController extends AppController {
 
                         $this->Order->Behaviors->load('Containable');
                         $order = $this->Order->find('first',[
-                            'contain'=>['Method','OrderCourse'],
+                            'contain'=>[
+                                'User' => [
+                                    'Student' => [
+                                        'City',
+                                        'State'
+                                    ]
+                                ],
+                                'Method',
+                                'OrderCourse' => [
+                                    'Course' => [
+                                        'fields' => ['Course.name']
+                                    ]
+                                ]
+                            ],
                             'conditions'=>['Order.transactionid'=>$postback['transaction']['id']]
                         ]);
 
                         if( !empty($order) ){
+                            $this->loadModel('Payment');
+
+                            $postbackStatus = $this->Order->Payment->getStatusByPagarmeStatus($postback['current_status']);
+                
+                            $statusPaid = $this->Order->Payment->getStatusByText('Aprovado');
+                
+                            if($order['Order']['order_type_id'] != $postbackStatus && $postbackStatus == $statusPaid) {
+                
+                                $services = $order['OrderCourse'];
+                
+                                $nfse = new InvoicesController;
+
+                                $xml = $nfse->buildXmlRps($order, $services);
+                
+                                $notasPendentes = $nfse->sendRps($xml);
+                
+                                if (!empty($notasPendentes)) {
+                                    
+                                    $notasEmitidas = $nfse->sendFiscalDocument($notasPendentes);
+                
+                                    if (!empty($notasEmitidas)) {
+                
+                                        $dataToEmail = $nfse->createNfse($notasEmitidas);
+
+                                        $courseName = $order['OrderCourse'][0]['Course']['name'];
+
+                                        $this->sendMailNfse($dataToEmail, $courseName);
+                                    }
+                
+                                }
+                            }
 
                             $success = false;
 
@@ -200,11 +246,12 @@ class OrdersController extends AppController {
                             }
 
                             if( $success ){
+
+                                $postbackStatus = $this->Order->Payment->getStatusByPagarmeStatus($postback['current_status']);
                                 
-                                $order['Order']['order_type_id'] = $this->Order->Payment->getStatusByPagarmeStatus($postback['current_status']);         
+                                $order['Order']['order_type_id'] = $postbackStatus;
 
                                 if( $this->Order->save($order) ){
-                                    $this->loadModel('Payment');
                                     $payment['Payment']['order_id']         = $order['Order']['id'];
                                     $payment['Payment']['TransacaoID']      = $postback['transaction']['id'];
                                     $payment['Payment']['DataTransacao']    = strftime("%Y-%m-%d %H:%M:%S",strtotime($postback['transaction']['date_updated']));
@@ -240,14 +287,58 @@ class OrdersController extends AppController {
         $postback = $this->request->data;
         $this->Order->Behaviors->load('Containable');
         $order = $this->Order->find('first',[
-            'contain'=>['Method','OrderCourse'],
+            'contain'=>[
+                'User' => [
+                    'Student' => [
+                        'City',
+                        'State'
+                    ]
+                ],
+                'Method',
+                'OrderCourse' => [
+                    'Course' => [
+                        'fields' => ['Course.name']
+                    ]
+                ]
+            ],
             'conditions'=>['Order.transactionid'=>$postback['transaction']['id']]
         ]);
 
         if( !empty($order) ){
             $this->loadModel('Payment');
 
-            $order['Order']['order_type_id'] = $this->Order->Payment->getStatusByPagarmeStatus($postback['current_status']);
+            $postbackStatus = $this->Order->Payment->getStatusByPagarmeStatus($postback['current_status']);
+
+            $statusPaid = $this->Order->Payment->getStatusByText('Aprovado');
+
+            if($order['Order']['order_type_id'] != $postbackStatus && $postbackStatus == $statusPaid) {
+
+                $services = $order['OrderCourse'];
+
+                $nfse = new InvoicesController;
+
+                $xml = $nfse->buildXmlRps($order, $services);
+
+                $notasPendentes = $nfse->sendRps($xml);
+
+                if (!empty($notasPendentes)) {
+                    
+                    $notasEmitidas = $nfse->sendFiscalDocument($notasPendentes);
+
+                    if (!empty($notasEmitidas)) {
+
+                        $dataToEmail = $nfse->createNfse($notasEmitidas);
+
+                        $courseName = $order['OrderCourse'][0]['Course']['name'];
+
+                        $this->sendMailNfse($dataToEmail, $courseName);
+
+                    }
+
+                }
+            }
+
+            $order['Order']['order_type_id'] = $postbackStatus;
             $this->Order->save($order);
             $payment['Payment']['order_id']         = $order['Order']['id'];
             $payment['Payment']['TransacaoID']      = $postback['transaction']['id'];
@@ -260,6 +351,20 @@ class OrdersController extends AppController {
             $this->Payment->save( $payment );       
         }
         return true;
+    }
+
+    private function sendMailNfse($dataToEmail, $courseName) {
+
+        $data['template'] = 'invoice'; 
+        $data['subject'] = '[LM Cursos de Trânsito] Nota Fiscal de Serviço';
+        $data['to'] = $dataToEmail['email'];
+        $data['content'] = array(
+            'messenger' => 'Olá ' . $dataToEmail['name'] . ', <br />Segue abaixo link para a nota de serviço para a compra do produto ' . $courseName,
+            'email' => $dataToEmail['email'],
+            'link' => $dataToEmail['invoice_link']
+        );
+                                        
+        $this->__SendMail($data);
     }
 
     private function __InsertPayment(){

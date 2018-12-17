@@ -128,14 +128,17 @@ Configure::write('Sistems', array(
     'CNPJ'              => '18.657.198/0001-46', // 00.000.000/0000-00
     'CorporateName'     => 'LM CURSOS DE TRÂNSITO', // Nome fantasia
     'CorporateFantasy'  => 'LM Cursos', // Nome da empresa
-    'ZipCode'           => '', // 00.000-000
+    'ZipCode'           => '22.730-540', // 00.000-000
     'AddressForCertificate' => 'Estrada do Cafundá Nº 820, Sala 202 - Taquara, Rio de Janeiro - RJ', // R. das Flores, 123
-    'Address'           => 'Estrada do Cafundá Nº 820', // R. das Flores, 123
+    'Address'           => 'Estrada do Cafundá', // R. das Flores, 123
+    'Number'            => '820',
     'complement1'       => 'Sala 202', // R. das Flores, 123
     'complement2'       => '', // R. das Flores, 123
-    'State'             => 'Rio de Janeiro - RJ', // Rio de Janeiro - RJ
-    'Email'             => '', // abc@def.com.br
-    'Phone1'            => '', // (xx) xxxx-xxxx
+    'Neighborhood'      => 'Tanque',
+    'City'              => 'Rio de Janeiro',
+    'State'             => 'RJ', // Rio de Janeiro - RJ
+    'Email'             => 'contato@lmcursosdetransito.com.br', // abc@def.com.br
+    'Phone1'            => '21 3268-3207', // (xx) xxxx-xxxx
     'Phone2'            => '', // (xx) xxxx-xxxx
     
     //Website Details
@@ -207,6 +210,15 @@ Configure::write('Pagarme',[
     'api_key' => 'ak_live_0vz1gyusrf0JRCmacvythVEoaVqCds',
     'encryption_key' => 'ek_live_jYE80z3OKPnAYOVcCdAmsOY69VmOGb',
     'postback_url' => 'https://lmcursosdetransito.com.br/orders/postback_pagarme'
+]);
+
+/*Configuration Of Bling*/
+Configure::write('Bling',[
+    'api_key' => '3ba53f315008fb48cf5973daf33a83477dc2c50b97a843af6b2a10dcc7130abfefb6a910',
+    'url_nota_servico' => 'https://bling.com.br/Api/v2/notaservico/',
+    'url_notas_servico' => 'https://bling.com.br/Api/v2/notasservico/',
+    'output_type' => 'json',
+    'codigo_servico' => '080214',
 ]);
 
 /**
