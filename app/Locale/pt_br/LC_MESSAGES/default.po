@@ -580,6 +580,21 @@ msgstr "Destaque"
 msgid "price" 
 msgstr "Preço" 
 
+msgid "value" 
+msgstr "Valor" 
+
+msgid "rps_number" 
+msgstr "Número RPS"
+
+msgid "invoice_number" 
+msgstr "Número NFSe"
+
+msgid "invoice_link" 
+msgstr "Link NFSe"
+
+msgid "client" 
+msgstr "Cliente"
+
 msgid "promotional_price" 
 msgstr "Preço Promocional" 
 
