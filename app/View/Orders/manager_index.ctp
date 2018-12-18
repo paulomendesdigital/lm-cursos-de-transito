@@ -100,6 +100,7 @@
                 <th><?php echo $this->Paginator->sort('created',__('Data da '.$pageTitle, true)); ?></th>
                 <th><?php echo $this->Paginator->sort('sender',__('Vendedor', true)); ?></th>
                 <th><?php echo 'Curso(s)'; ?></th>
+                <th><?php echo 'Valor'; ?></th>
                 <th><?php echo 'UF'; ?></th>
                 <th><?php echo 'Cidade'; ?></th>
                 <th>Status Detran</th>
@@ -130,6 +131,7 @@
                         <?php echo (!empty($order['Order']['sender']) ? $order['Order']['sender'] : 'LM'); ?>
                     </td>
                     <td><?php echo $course['Course']['name']?></td>
+                    <td><?php echo isset($order['Order']['value']) ? 'R$' . $this->Utility->__FormatPrice($order['Order']['value']) : ''?></td>
                     <td><?php echo isset($course['State']['abbreviation']) ? $course['State']['abbreviation'] : ''?></td>
                     <td><?php echo isset($course['Citie']['name']) ? $course['Citie']['name'] : ''?></td>
                     <td><?php echo $this->Utility->__StatusDetran($course)?></td>
