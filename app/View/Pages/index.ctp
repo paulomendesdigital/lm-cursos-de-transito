@@ -34,6 +34,37 @@
 			</div>
 		</section>
 	<?php } ?>
+	<section class="reciclagens-buttons">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h4 class='section-title'>Cursos de Reciclagem</h4>
+					<hr/>
+					
+					<div class="row">
+						<div class="col-md-1"></div>
+						<?php
+						$i = 0;
+						foreach ($states as $state) {
+							
+							echo '<div class="col-md-2">';
+								echo $this->Html->link($state['name'], ['controller' => 'courses', 'action' => 'view', 'id' => $course['Course']['id'], 'slug' => $this->Utility->__Normalize($course['Course']['name']), 'uf' => $state['abbreviation']], ['class' => 'button btn btn-'.$colorStates[$i], 'escape' => false]);
+
+							echo '</div>';
+
+							$i++;
+						}
+						?>
+						<div class="col-md-1"></div>
+					</div>
+						
+				</div>
+			</div>
+		</div>
+
+		<hr/>
+	</section>
+
 	<section id='courses-login-section'>
 		<div class='container'>
 			<div class='row'>				

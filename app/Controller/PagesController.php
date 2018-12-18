@@ -21,7 +21,69 @@ class PagesController extends AppController {
                 'status'=>1
             ]
         ]);
-        $this->set('webdoors',$webdoors);
+
+
+        // ESTADOS*************************************************************************************
+        // 3 = Curso de Reciclagem
+        $courseTypeId = '3';
+
+        $course = $this->Course->find('first', [
+            'conditions' => [
+                'Course.status' => 1,
+                'Course.course_type_id' => $courseTypeId
+            ],
+            'fields' => ['id', 'name']
+        ]);
+        
+        $this->loadModel('CourseState');
+        $this->CourseState->Behaviors->load('Containable');
+
+        //estados
+        $arrStatesEnabled = $this->CourseState->find('list', [
+            'fields' => ['State.id', 'State.id'],
+            'contain'    => ['State'],
+            'conditions' => [
+                'CourseState.course_type_id' => $courseTypeId,
+                'CourseState.status'         => 1
+            ]
+        ]);
+
+        $arrStatesModuleEnabled = $this->Course->ModuleCourse->find('list',[
+            'fields'=>['ModuleCourse.state_id'],
+            'conditions'=> ['ModuleCourse.course_id'=>$course['Course']['id']]
+        ]);
+
+        $arrStatesEnabled = array_intersect($arrStatesEnabled, $arrStatesModuleEnabled);
+
+        $this->loadModel('State');
+        $this->State->recursive = 0;
+        $statesResult = $this->State->find('all',[
+            'conditions'=>[
+                'State.id' => $arrStatesEnabled,
+            ]
+        ]);
+
+        $states = [];
+        foreach ($statesResult as $val) {
+            $states[$val['State']['id']]['name'] = $val['State']['name'];
+            $states[$val['State']['id']]['abbreviation'] = $val['State']['abbreviation'];
+        }
+
+        //Home page button colors
+        $colorStates[] = 'success';
+        $colorStates[] = 'primary';
+        $colorStates[] = 'warning';
+        $colorStates[] = 'info';
+        $colorStates[] = 'danger';
+        $colorStates[] = 'success';
+        $colorStates[] = 'primary';
+        $colorStates[] = 'warning';
+        $colorStates[] = 'info';
+        $colorStates[] = 'danger';
+
+        // FIM ESTADOS*************************************************************************************
+
+        $this->set(compact('webdoors', 'course', 'states', 'colorStates'));
 
     	//return $this->redirect(array('controller' => 'meus-cursos' ,'action' => 'index', 'manager' => false));    
 	}
@@ -34,7 +96,7 @@ class PagesController extends AppController {
         $this->loadModel('Grille');
         $quemsomos = $this->Grille->findById( Grille::QUEM_SOMOS );
         $this->set(compact('quemsomos'));
-	}
+    }
 
     public function partner()
     {
