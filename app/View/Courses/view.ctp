@@ -15,7 +15,7 @@
 			<?php if(!empty($course)){ ?>
 				<h1 class='course-name'><?php echo $course['Course']['name'];?></h1>
                 <?php if ($recycle && $state_id == 16) {
-                    echo "<h2 class='text-danger'>Informamos que no período do dia 27/12/18  até o dia 03/01/19 não será possível realizar compra deste curso!</h2>";
+                    echo "<h2 class='text-danger'>Informamos que no período do dia 27/12/18  até o dia 03/01/19 não será possível realizar compra deste curso, pois o Detran PR estará de recesso!</h2>";
                 } ?>
 
                 <?php if ($recycle) {?>

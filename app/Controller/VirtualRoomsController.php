@@ -121,7 +121,7 @@ class VirtualRoomsController extends AppController {
 		$modules = $this->_DtoModuleCourse($module_courses);
 		$course['Course']['avaliation'] = $this->__getConfigAvaliationCourse($course, $modules);
 
-		$this->set(compact('course', 'modules', 'token'));
+		$this->set(compact('course', 'modules', 'token', 'state_id'));
 	}
 
 	/* Acesso as disciplinas do curso */
