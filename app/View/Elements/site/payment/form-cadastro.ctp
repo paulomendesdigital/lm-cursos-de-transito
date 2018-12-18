@@ -20,8 +20,40 @@ echo $this->Form->hidden('Student.0.id');
     <div class="form-group required">
         <?php echo $this->Form->input('Student.0.birth', ['label' => 'Data de Nascimento', 'type' => 'text', 'required' => true, 'data-mask' => 'date', 'data-rule-dateITA' => 'true']); ?>
     </div>
+
     <div class="form-group">
         <?php echo $this->Form->input('Student.0.gender', ['label' => 'Sexo', 'empty' => ' ', 'options' => [1 => 'Masculino', 2 => 'Feminino']]); ?>
+    </div>
+
+    <div id="address">
+        <div class="form-group required">
+            <?php echo $this->Form->hidden('Student.0.id'); ?>
+            <?php echo $this->Form->input('Student.0.zipcode',['class'=>'form-control','label'=>'CEP', 'required' => true,'data-mask'=>'zipcode']); ?>
+        </div>
+        
+        <div class="form-group required">
+            <?php echo $this->Form->input('Student.0.address',['class'=>'form-control','label'=>'Endereço', 'required' => true, 'data-toggle'=>'returnAddress']); ?>
+        </div>
+        
+        <div class="form-group required">
+            <?php echo $this->Form->input('Student.0.number',['class'=>'form-control','label'=>'Nº', 'required' => true, 'data-toggle'=>'returnNumber']); ?>
+        </div>
+        
+        <div class="form-group required">
+            <?php echo $this->Form->input('Student.0.complement',['class'=>'form-control','label'=>'Compl.']); ?>
+        </div>
+        
+        <div class="form-group required">
+            <?php echo $this->Form->input('Student.0.neighborhood',['class'=>'form-control','label'=>'Bairro', 'required' => true, 'data-toggle'=>'returnNeighborhood']); ?>
+        </div>
+
+        <div class="form-group required">
+            <?php echo $this->Form->input('Student.0.state_id',['class'=>'form-control','label'=>'Estado', 'required' => true, 'data-toggle'=>'returnOneState']); ?>
+        </div>
+
+        <div class="form-group required">
+            <?php echo $this->Form->input('Student.0.city_id',['class'=>'form-control','label'=>'Cidade', 'required' => true, 'data-toggle'=>'returnCity']); ?>
+        </div>
     </div>
 
     <h5>Dados de Acesso</h5>
