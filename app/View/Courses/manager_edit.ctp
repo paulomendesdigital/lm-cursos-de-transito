@@ -45,6 +45,7 @@
                          echo $this->Form->input('image', array('type' => 'file','class' => 'form-control', 'label'=>__('Imagem')));
                          echo $this->Form->input('student_guide', array('type' => 'file','class' => 'form-control', 'label'=>__('Guia do Aluno'), 'after'=>$text_after_guide));
                          echo $this->Form->input('navigability_guide', array('type' => 'file','class' => 'form-control', 'label'=>__('Guia de Navegabilidade'), 'after'=>$text_after_navigability_guide));
+                         echo $this->Form->input('ordination', array('class' => 'form-control', 'data-mask' => 'number', 'label'=>'Ordenação'));
                          echo $this->Form->input('name', array('class' => 'form-control', 'data-mask' => 'name', 'label'=>__('name')));
                          echo $this->Form->input('firstname', array('class' => 'form-control', 'data-mask' => 'firstname', 'label'=>__('firstname')));
                          echo $this->Form->input('course_type_id', array('class' => 'form-control', 'data-mask' => 'course_type_id', 'label'=>__('course_type_id')));

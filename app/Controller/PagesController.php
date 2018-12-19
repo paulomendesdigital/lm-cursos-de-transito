@@ -10,8 +10,8 @@ class PagesController extends AppController {
         $this->Course->recursive = -1;
         $courses = $this->Course->find('all',[
             'fields'=>['id','name','image','active_order'],
-            'conditions' => [
-                'Course.status' => 1]
+            'conditions' => ['Course.status' => 1],
+            'order' => ['Course.ordination' => 'ASC']
         ]);
         $this->set('courses',$courses);
 
