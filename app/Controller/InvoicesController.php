@@ -194,7 +194,6 @@ class InvoicesController extends AppController {
 
             if ($this->Invoice->save($infoServico)) {
                 $response = $infoServico;
-                $response['email'] = 'paulomendesdigital@gmail.com';
             }
         }
 
