@@ -190,35 +190,7 @@ class OrdersController extends AppController {
                         if( !empty($order) ){
                             $this->loadModel('Payment');
 
-                            $postbackStatus = $this->Order->Payment->getStatusByPagarmeStatus($postback['current_status']);
-                
-                            $statusPaid = $this->Order->Payment->getStatusByText('Aprovado');
-                
-                            if($order['Order']['order_type_id'] != $postbackStatus && $postbackStatus == $statusPaid) {
-                
-                                $services = $order['OrderCourse'];
-                
-                                $nfse = new InvoicesController;
-
-                                $xml = $nfse->buildXmlRps($order, $services);
-                
-                                $notasPendentes = $nfse->sendRps($xml);
-                
-                                if (!empty($notasPendentes)) {
-                                    
-                                    $notasEmitidas = $nfse->sendFiscalDocument($notasPendentes);
-                
-                                    if (!empty($notasEmitidas)) {
-                
-                                        $dataToEmail = $nfse->createNfse($notasEmitidas);
-
-                                        $courseName = $order['OrderCourse'][0]['Course']['name'];
-
-                                        $this->sendMailNfse($dataToEmail, $courseName);
-                                    }
-                
-                                }
-                            }
+                            $this->createNfse($order, $postback['current_status']);
 
                             $success = false;
 
@@ -306,37 +278,8 @@ class OrdersController extends AppController {
 
         if( !empty($order) ){
             $this->loadModel('Payment');
-
-            $postbackStatus = $this->Order->Payment->getStatusByPagarmeStatus($postback['current_status']);
-
-            $statusPaid = $this->Order->Payment->getStatusByText('Aprovado');
-
-            if($order['Order']['order_type_id'] != $postbackStatus && $postbackStatus == $statusPaid) {
-
-                $services = $order['OrderCourse'];
-
-                $nfse = new InvoicesController;
-
-                $xml = $nfse->buildXmlRps($order, $services);
-
-                $notasPendentes = $nfse->sendRps($xml);
-
-                if (!empty($notasPendentes)) {
-                    
-                    $notasEmitidas = $nfse->sendFiscalDocument($notasPendentes);
-
-                    if (!empty($notasEmitidas)) {
-
-                        $dataToEmail = $nfse->createNfse($notasEmitidas);
-
-                        $courseName = $order['OrderCourse'][0]['Course']['name'];
-
-                        $this->sendMailNfse($dataToEmail, $courseName);
-
-                    }
-
-                }
-            }
+            
+            $this->createNfse($order, $postback['current_status']);
 
             $order['Order']['order_type_id'] = $postbackStatus;
             $this->Order->save($order);
@@ -351,6 +294,47 @@ class OrdersController extends AppController {
             $this->Payment->save( $payment );       
         }
         return true;
+    }
+
+    private function createNfse($order, $postBackCurrentStatus) {
+
+        $postbackStatus = $this->Order->Payment->getStatusByPagarmeStatus($postBackCurrentStatus);
+                
+        $statusPaid = $this->Order->Payment->getStatusByText('Aprovado');
+
+        if ($order['Order']['order_type_id'] != $postbackStatus && $postbackStatus == $statusPaid) {
+
+            $services = $order['OrderCourse'];
+
+            $nfse = new InvoicesController;
+
+            $xml = $nfse->buildXmlRps($order, $services);
+
+            $notasPendentes = $nfse->sendRps($xml);
+
+            if (!empty($notasPendentes)) {
+                
+                $notasEmitidas = $nfse->sendFiscalDocument($notasPendentes);
+
+                $this->log('NFSe notasEmitidas: ' . $notasEmitidas, 'nfse');
+
+                if (!empty($notasEmitidas)) {
+
+                    $dataToEmail = $nfse->createNfse($notasEmitidas);
+
+                    $courseName = $order['OrderCourse'][0]['Course']['name'];
+
+                    $this->sendMailNfse($dataToEmail, $courseName);
+                } else {
+                    $this->log('NFSe NÃO EMITIDA: nota emitida não criada ' . $notasEmitidas, 'nfse');
+                }
+
+            } else {
+                $this->log('NFSe NÃO EMITIDA: nota pendente não criada ' . $notasPendentes, 'nfse');
+            }
+        } else {
+            $this->log('NFSe NÃO EMITIDA: o código do pedido ($order["Order"]["order_type_id"]) é igual ao status do postback ($postbackStatus) ou o status do postback ($postbackStatus) é diferente de pago ($statusPaid) || $order["Order"]["order_type_id"] = ' . $order['Order']['order_type_id'] . ' || $postbackStatus = ' . $postbackStatus . ' || $statusPaid = ' . $statusPaid, 'nfse');
+        }
     }
 
     private function sendMailNfse($dataToEmail, $courseName) {

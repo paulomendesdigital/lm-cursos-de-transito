@@ -118,6 +118,11 @@ CakeLog::config('error', array(
 	'types' => array('warning', 'error', 'critical', 'alert', 'emergency'),
 	'file' => 'error',
 ));
+CakeLog::config('nfse', array(
+	'engine' => 'File',
+    'types' => array('notice', 'info', 'debug'),
+	'file' => 'nfse',
+));
 
 /**
  * Configuration Of Sistems

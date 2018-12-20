@@ -118,7 +118,11 @@ class InvoicesController extends AppController {
         
         $arrPagarMe = $this->buildArrPagarMe($order['User'], $services, $order['Order']['value']);
 
+        $this->log('NFSe - arrPagarMe: ' . $arrPagarMe, 'nfse');
+
         $xml = $this->buildXmlPagarMe(date('d/m/Y'), $arrPagarMe['client'], $arrPagarMe['services'], $arrPagarMe['parcels']);
+
+        $this->log('NFSe XML: ' . $xml, 'nfse');
 
         return $xml;
     }
@@ -132,6 +136,8 @@ class InvoicesController extends AppController {
             "xml" => rawurlencode($xml)
         );
         $notasPendentes = $this->curlSendRps($url, $posts);
+
+        $this->log('NFSe notasPendentes: ' . $notasPendentes, 'nfse');
 
         if (empty($notasPendentes)) { return false; }
 
@@ -155,6 +161,8 @@ class InvoicesController extends AppController {
             );
 
             $retornoSend = $this->curlSendFiscalDocument($url, $posts);
+
+            $this->log('NFSe sendFiscalDocument: ' . $retornoSend, 'nfse');
             
             $notasEmitidas[] = json_decode($retornoSend, true);
         }
