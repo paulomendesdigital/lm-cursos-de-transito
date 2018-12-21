@@ -54,7 +54,9 @@ class IntegracaoDetransService
 
         if ($objIntegracao) {
             try {
+                    
                 return $objIntegracao->validar(IntegracaoParams::createFromArray(array_merge($arrCurso, $parametros)));
+
             } catch (Exception $exception) {
                 throw $exception;
             } finally {
@@ -112,6 +114,7 @@ class IntegracaoDetransService
     public function matricular($orderId, $courseId)
     {
         $arrMatricula   = $this->getDadosMatricula($orderId, $courseId);
+        
         $arrOrderCourse = $arrMatricula['OrderCourse'];
 
         $objIntegracao = $this->getIntegracao($arrMatricula['Course'], $arrOrderCourse['state_id'], $arrOrderCourse['citie_id']);
@@ -122,6 +125,7 @@ class IntegracaoDetransService
 
                 //VALIDA. SE AINDA NÃO FOI VALIDADO
                 if ($arrOrderCourse['status_detran_id'] == StatusDetran::NAO_VALIDADO || $arrOrderCourse['status_detran_id'] == StatusDetran::ERRO) {
+                    
                     $bolValido = $objIntegracao->validar(IntegracaoParams::createFromArray($arrMatricula));
 
                     $arrOrderCourse['status_detran_id']        = $bolValido ? StatusDetran::VALIDADO : StatusDetran::ERRO;
@@ -425,6 +429,11 @@ class IntegracaoDetransService
 
             //CURSOS DE RECICLAGEM ALAGOAS
             } elseif ($courseTypeId == CourseType::RECICLAGEM && $stateId == State::ALAGOAS) {
+                App::uses('IntegracaoDetranAl', 'IntegracaoDetrans');
+                return new IntegracaoDetranAl($this->origem);
+
+            //CURSOS DE ATUALIZAÇÃO ALAGOAS
+            } elseif ($courseTypeId == CourseType::ATUALIZACAO && $stateId == State::ALAGOAS) {
                 App::uses('IntegracaoDetranAl', 'IntegracaoDetrans');
                 return new IntegracaoDetranAl($this->origem);
 

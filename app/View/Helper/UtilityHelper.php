@@ -370,7 +370,7 @@ class UtilityHelper extends AppHelper {
     }
 
     public function __StatusDetran($course) {
-        if ($course['Course']['course_type_id'] == CourseType::RECICLAGEM || $course['Course']['course_type_id'] == CourseType::ESPECIALIZADOS) {
+        if ($course['Course']['course_type_id'] == CourseType::RECICLAGEM || $course['Course']['course_type_id'] == CourseType::ESPECIALIZADOS || $course['Course']['course_type_id'] == CourseType::ATUALIZACAO) {
 
             $intStatusDetran = isset($course['StatusDetran']['id'])   ? $course['StatusDetran']['id']   : null;
             $strStatusDetran = isset($course['StatusDetran']['nome']) ? $course['StatusDetran']['nome'] : 'Não comunicado';

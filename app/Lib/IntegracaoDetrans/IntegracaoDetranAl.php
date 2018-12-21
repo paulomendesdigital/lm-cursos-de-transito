@@ -12,6 +12,10 @@ App::uses('CourseType', 'Model');
 class IntegracaoDetranAl extends IntegracaoBase
 {
     //HOMOLOGAÇÃO
+    // const URL_WEBSERVICE_MATRICULA   = 'https://wshml01.detran.al.gov.br/wsstack/services/CFCNW020?wsdl';
+    // const URL_WEBSERVICE_CERTIFICADO = 'https://wshml01.detran.al.gov.br/wsstack/services/CFCNW045?wsdl';
+
+    //PRODUÇÃO
     const URL_WEBSERVICE_CONSULTA    = 'https://wsprd02.detran.al.gov.br/wsstack/services/CFCNW009?wsdl';
     const URL_WEBSERVICE_MATRICULA   = 'https://wsprd02.detran.al.gov.br/wsstack/services/CFCNW020?wsdl';
     const URL_WEBSERVICE_CERTIFICADO = 'https://wsprd02.detran.al.gov.br/wsstack/services/CFCNW045?wsdl';
@@ -154,6 +158,12 @@ class IntegracaoDetranAl extends IntegracaoBase
      */
     private function client($strOperacao, IntegracaoParams $objParams)
     {
+        $codigoCursoE = '20';
+
+        if ($objParams->course_type_id == '5') {
+            $codigoCursoE = '30';
+        }
+
         ini_set('soap.wsdl_cache_enabled',0);
         ini_set('soap.wsdl_cache_ttl',0);
 
@@ -179,7 +189,7 @@ class IntegracaoDetranAl extends IntegracaoBase
                     'CPF-E'              => $objParams->cpf,
                     'CODIGO-CFC-E'       => $objParams->cod_cfc,
                     'TIPO-CURSO-E'       => 'T', //teórico
-                    'CODIGO-CURSO-E'     => '20',
+                    'CODIGO-CURSO-E'     => $codigoCursoE,
                     'CATEGORIA-CURSO-E'  => ' ', //vazio
                     'MATRICULA-E'        => self::COD_MATRICULA
                 ];
@@ -200,7 +210,7 @@ class IntegracaoDetranAl extends IntegracaoBase
                     'DATA-FINAL-E'              => date('Ymd'),
                     'CARGA-HORARIA-E'           => '32',
                     'CPF-INSTRUTOR-E'           => self::CPF_INSTRUTOR,
-                    'CODIGO-CURSO-E'            => '20',
+                    'CODIGO-CURSO-E'            => $codigoCursoE,
                     'CFC-E'                     => $objParams->cod_cfc,
                     'CNPJ-INSTITUICAO-ENSINO-E' => '18657198000146',
                     'MATRICULA-SISTEMA-E'       => self::COD_MATRICULA

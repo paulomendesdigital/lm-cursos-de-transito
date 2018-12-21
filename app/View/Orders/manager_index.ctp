@@ -141,7 +141,7 @@
                         <?php
                             if ($aprovado) {
                                 foreach ($order['OrderCourse'] as $course) {
-                                    if ($course['Course']['course_type_id'] == CourseType::RECICLAGEM || $course['Course']['course_type_id'] == CourseType::ESPECIALIZADOS) {
+                                    if ($course['Course']['course_type_id'] == CourseType::RECICLAGEM || $course['Course']['course_type_id'] == CourseType::ESPECIALIZADOS || $course['Course']['course_type_id'] == CourseType::ATUALIZACAO) {
                                         echo $this->Html->link(__('<span class="icon-connection"></span>'), array('action' => 'recomunicar', $order['Order']['id']), array('class' => 'btn btn-warning btn-xs btn-connection', 'escape' => false, 'data-toggle' => 'tooltip', 'data-original-title' => 'Atualizar Detran'));
                                         break;
                                     }

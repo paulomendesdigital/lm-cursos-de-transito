@@ -187,6 +187,8 @@
                 $('.input-cpf').attr('required', true);
                 $('.input-renach,.input-cnh_category').attr('required', false);
             }
+        } else if (course_type_id == 5) { //CURSO DE ATUALIZAÇÃO PARA RENOVAÇÃO DA CNH
+            $('.input-cpf,.input-renach,.input-cnh_category').attr('required', true);
         } else {
             $('.input-cpf,.input-renach,.input-cnh_category').attr('required', false);
         }
