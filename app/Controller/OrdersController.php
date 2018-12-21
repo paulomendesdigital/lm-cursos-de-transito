@@ -159,12 +159,18 @@ class OrdersController extends AppController {
 
             }else{
 
+                $this->log('INÍCIO de cartão de crédito-----------------------------------------------', 'nfse');
+
                 if( $this->PagarMe->validatePostback(file_get_contents("php://input"),$this->request->header('X-Hub-Signature')) ){
+
+                    $this->log('PagarMe validado', 'nfse');
                     
                     $this->loadModel('Order');
                     $postback = $this->request->data;
 
                     if( !empty($postback) ){
+
+                        $this->log('Existe postback', 'nfse');
 
                         $this->request->header('X-Hub-Signature');
 
@@ -188,6 +194,11 @@ class OrdersController extends AppController {
                         ]);
 
                         if( !empty($order) ){
+
+                            $this->log('Existe order', 'nfse');
+
+                            $this->log('FIM de cartão de crédito-----------------------------------------------', 'nfse');
+
                             $this->loadModel('Payment');
 
                             $this->createNfse($order, $postback['current_status']);
