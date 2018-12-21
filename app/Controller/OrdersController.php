@@ -344,7 +344,9 @@ class OrdersController extends AppController {
                 $this->log('NFSe NÃO EMITIDA: nota pendente não criada ' . $notasPendentes, 'nfse');
             }
         } else {
-            $this->log('NFSe NÃO EMITIDA: o código do pedido ($order["Order"]["order_type_id"]) é igual ao status do postback ($postbackStatus) ou o status do postback ($postbackStatus) é diferente de pago ($statusPaid) || $order["Order"]["order_type_id"] = ' . $order['Order']['order_type_id'] . ' || $postbackStatus = ' . $postbackStatus . ' || $statusPaid = ' . $statusPaid, 'nfse');
+            $this->log('NFSe NÃO EMITIDA. Usuário: ' . $order['User']['name'] . ' - CPF: ' . $order['User']['cpf']);
+
+            $this->log('O código do pedido ($order["Order"]["order_type_id"]) é igual ao status do postback ($postbackStatus) ou o status do postback ($postbackStatus) é diferente de pago ($statusPaid) || $order["Order"]["order_type_id"] = ' . $order['Order']['order_type_id'] . ' || $postbackStatus = ' . $postbackStatus . ' || $statusPaid = ' . $statusPaid, 'nfse');
         }
     }
 
