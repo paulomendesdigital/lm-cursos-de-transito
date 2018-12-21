@@ -193,6 +193,9 @@ class OrdersController extends AppController {
                             'conditions'=>['Order.transactionid'=>$postback['transaction']['id']]
                         ]);
 
+                        $this->log('$postback["transaction"]["id"] = ' . $postback['transaction']['id'], 'nfse');
+                        $this->log('$order = ' . $order, 'nfse');
+
                         if( !empty($order) ){
 
                             $this->log('Existe order', 'nfse');
