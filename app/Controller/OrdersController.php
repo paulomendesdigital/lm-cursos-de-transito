@@ -168,6 +168,8 @@ class OrdersController extends AppController {
                     $this->loadModel('Order');
                     $postback = $this->request->data;
 
+                    $this->log('POSTBACK:' . $postback);
+
                     if( !empty($postback) ){
 
                         $this->log('Existe postback', 'nfse');
