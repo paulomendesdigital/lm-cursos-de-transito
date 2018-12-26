@@ -206,8 +206,6 @@ class OrdersController extends AppController {
 
                             $this->loadModel('Payment');
 
-                            $this->createNfse($order, $postback['current_status']);
-
                             $success = false;
 
                             if( $order['Method']['code'] == $this->Order->Method->getMetodoPagamentoPagarmeCartaoCode() ){
@@ -249,6 +247,9 @@ class OrdersController extends AppController {
                                     $payment['Payment']['NumItens']         = count($order['OrderCourse']);
                                     $this->Payment->create();
                                     $this->Payment->save( $payment );
+
+                                    $this->createNfse($order, $postback['current_status']);
+                                    
                                     return true;
                                 }
                             }
@@ -294,8 +295,6 @@ class OrdersController extends AppController {
 
         if( !empty($order) ){
             $this->loadModel('Payment');
-            
-            $this->createNfse($order, $postback['current_status']);
 
             $order['Order']['order_type_id'] = $postbackStatus;
             $this->Order->save($order);
@@ -308,6 +307,8 @@ class OrdersController extends AppController {
             $payment['Payment']['NumItens']         = count($order['OrderCourse']);
             $this->Payment->create();
             $this->Payment->save( $payment );       
+            
+            $this->createNfse($order, $postback['current_status']);
         }
         return true;
     }
