@@ -168,7 +168,9 @@ class OrdersController extends AppController {
                     $this->loadModel('Order');
                     $postback = $this->request->data;
 
-                    $this->log('POSTBACK:' . $postback);
+                    $postbackJson = json_encode($postback);
+
+                    $this->log('POSTBACK:' . $postbackJson, 'nfse');
 
                     if( !empty($postback) ){
 
@@ -195,8 +197,10 @@ class OrdersController extends AppController {
                             'conditions'=>['Order.transactionid'=>$postback['transaction']['id']]
                         ]);
 
+                        $orderJson = json_encode($order);
+
                         $this->log('$postback["transaction"]["id"] = ' . $postback['transaction']['id'], 'nfse');
-                        $this->log('$order = ' . $order, 'nfse');
+                        $this->log('$order = ' . $orderJson, 'nfse');
 
                         if( !empty($order) ){
 
@@ -332,8 +336,10 @@ class OrdersController extends AppController {
             if (!empty($notasPendentes)) {
                 
                 $notasEmitidas = $nfse->sendFiscalDocument($notasPendentes);
+                
+                $notasEmitidasJson = json_encode($notasEmitidas);
 
-                $this->log('NFSe notasEmitidas: ' . $notasEmitidas, 'nfse');
+                $this->log('NFSe notasEmitidas: ' . $notasEmitidasJson, 'nfse');
 
                 if (!empty($notasEmitidas)) {
 

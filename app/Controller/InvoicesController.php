@@ -118,7 +118,9 @@ class InvoicesController extends AppController {
         
         $arrPagarMe = $this->buildArrPagarMe($order['User'], $services, $order['Order']['value']);
 
-        $this->log('NFSe - arrPagarMe: ' . $arrPagarMe, 'nfse');
+        $arrPagarMeJson = json_encode($arrPagarMe);
+
+        $this->log('NFSe - arrPagarMe: ' . $arrPagarMeJson, 'nfse');
 
         $xml = $this->buildXmlPagarMe(date('d/m/Y'), $arrPagarMe['client'], $arrPagarMe['services'], $arrPagarMe['parcels']);
 
