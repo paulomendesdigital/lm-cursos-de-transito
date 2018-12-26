@@ -54,7 +54,11 @@ class ReportsController extends AppController {
             $this->UserCertificate->Behaviors->load('Containable');
             $reports = $this->UserCertificate->find('all', [
                 'contain'    => [
-                    'User',
+                    'User' => [
+                        'conditions' => [
+                            'school_id' => NULL
+                        ]
+                    ],
                     'Order' => [
                         'OrderCourse' => [
                             'State',
@@ -74,6 +78,14 @@ class ReportsController extends AppController {
                 ],
                 'order'      => ['UserCertificate.finish']
             ]);
+            
+            $i = 0;
+            foreach($reports as $report) {
+                if(empty($report['User']['name'])) {
+                    unset($reports[$i]);
+                }
+                $i++;
+            }
 
             $states = $this->UserCertificate->Course->getStatesOfCourse($this->request->data['Report']['course_id']);
 
@@ -226,7 +238,10 @@ class ReportsController extends AppController {
                             'name',
                             'cpf',
                             'email',
-                            'School' => ['name']
+                            'School' => ['name'],
+                            'conditions' => [
+                                'school_id' => NULL
+                            ]
                         ],
                         'Payment'   => [
                             'fields'     => ['created'],
@@ -240,6 +255,14 @@ class ReportsController extends AppController {
                 ],
                 'conditions' => $arrConditions
             ]);
+            
+            $i = 0;
+            foreach($dados as $row) {
+                if(empty($row['Order']['User']['name'])) {
+                    unset($dados[$i]);
+                }
+                $i++;
+            }
 
             $this->set(compact('dados'));
 
