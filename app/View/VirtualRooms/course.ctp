@@ -21,10 +21,6 @@
          	<div class="page-section padding-top-none">
             <div class="media v-middle">
               <div class="media-body">
-
-                <?php if ($course['Course']['course_type_id'] == '3' && $state_id == 16) {
-                  echo "<h2 class='text-danger'>Informamos que no período do dia 27/12/18 até o dia 03/01/19 não será possível acessar este curso, pois o Detran PR estará de recesso!</h2>";
-                } ?>
                 
                 <h1 class="text-display-1 margin-none"><?php echo $course['Course']['name'];?> 
                   <small><?php echo $course['Course']['firstname'];?></small>
