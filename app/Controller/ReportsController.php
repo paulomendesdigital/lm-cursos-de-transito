@@ -78,14 +78,6 @@ class ReportsController extends AppController {
                 ],
                 'order'      => ['UserCertificate.finish']
             ]);
-            
-            $i = 0;
-            foreach($reports as $report) {
-                if(empty($report['User']['name'])) {
-                    unset($reports[$i]);
-                }
-                $i++;
-            }
 
             $states = $this->UserCertificate->Course->getStatesOfCourse($this->request->data['Report']['course_id']);
 
