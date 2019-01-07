@@ -54,11 +54,7 @@ class ReportsController extends AppController {
             $this->UserCertificate->Behaviors->load('Containable');
             $reports = $this->UserCertificate->find('all', [
                 'contain'    => [
-                    'User' => [
-                        'conditions' => [
-                            'school_id' => NULL
-                        ]
-                    ],
+                    'User',
                     'Order' => [
                         'OrderCourse' => [
                             'State',
