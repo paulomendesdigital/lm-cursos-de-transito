@@ -72,6 +72,7 @@
                 <th><?php echo $this->Paginator->sort('invoice_link',__('invoice_link', true)); ?></th>
                 <th><?php echo $this->Paginator->sort('name',__('client', true)); ?></th>
                 <th><?php echo $this->Paginator->sort('cpf',__('cpf', true)); ?></th>
+                <th><?php echo $this->Paginator->sort('created',__('Emissão', true)); ?></th>
             </tr>
         </thead>
         <tbody>
@@ -94,6 +95,7 @@
 
                     <td><?php echo $this->Utility->__LimitText($invoice['Invoice']['name']); ?></td>
                     <td><?php echo h($invoice['Invoice']['cpf']); ?></td>
+                    <td><?php echo $this->Utility->__FormatDate($invoice['Invoice']['created']); ?></td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
