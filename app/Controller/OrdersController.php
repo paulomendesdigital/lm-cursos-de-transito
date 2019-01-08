@@ -300,8 +300,11 @@ class OrdersController extends AppController {
         if( !empty($order) ){
             $this->loadModel('Payment');
 
+            $postbackStatus = $this->Order->Payment->getStatusByPagarmeStatus($postback['current_status']);
+
             $order['Order']['order_type_id'] = $postbackStatus;
             $this->Order->save($order);
+            
             $payment['Payment']['order_id']         = $order['Order']['id'];
             $payment['Payment']['TransacaoID']      = $postback['transaction']['id'];
             $payment['Payment']['DataTransacao']    = strftime("%Y-%m-%d %H:%M:%S",strtotime($postback['transaction']['date_updated']));
