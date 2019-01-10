@@ -34,6 +34,9 @@
                                 <?php echo $this->Element('site/course-cart-form', ['course' => $course, 'course_scopes' => $course_scopes, 'currentCourseState' => $currentCourseState, 'sender' => $sender]); ?>
                             </div>
                         </div>
+                        
+                        <?php echo $this->Element('site/phones'); ?>
+
                         <div class="row">
                             <div class="col-xs-12">
                                 <article class="course-description">
