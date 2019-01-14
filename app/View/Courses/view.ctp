@@ -37,6 +37,8 @@
                         
                         <?php echo $this->Element('site/phones'); ?>
 
+                        <?php echo $this->Element('site/credenciamentos'); ?>
+
                         <div class="row">
                             <div class="col-xs-12">
                                 <article class="course-description">

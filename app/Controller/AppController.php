@@ -1136,10 +1136,11 @@ class AppController extends Controller {
 		#ESPECIALIZADOS  = 2;
 		#RECICLAGEM 	 = 3;
 		#NEUTROS 	 	 = 4;
+		#ATUALIZACAO 	 = 5;
 
     	$countModules = count($modules);
     	$completedModules = 0;
-    	if( in_array($course['CourseType']['id'], [CourseType::RECICLAGEM,CourseType::ESPECIALIZADOS, CourseType::NEUTROS]) ){
+    	if( in_array($course['CourseType']['id'], [CourseType::RECICLAGEM,CourseType::ATUALIZACAO,CourseType::ESPECIALIZADOS, CourseType::NEUTROS]) ){
 
 	    	foreach ($modules as $module) {
 	    		if( $module['Module']['is_show_avaliation'] OR $module['Module']['is_introduction'] ){
