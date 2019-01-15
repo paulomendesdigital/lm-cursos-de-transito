@@ -9,13 +9,15 @@
 		<?php echo $this->Utility->breadcumbs([
 			'Início'=>['controller'=>'pages','action'=>'index','prefixes'=>false],
 			$course['Course']['name'] => ['controller'=>'courses','action'=>'view',$course['Course']['id'],'prefixes'=>false]
-		]);
+        ]);
+        
 		?>
 		<section class="course">
 			<?php if(!empty($course)){ ?>
 				<h1 class='course-name'><?php echo $course['Course']['name'];?></h1>
 
                 <?php if ($recycle) {?>
+
                     <div class="row">
                         <div class="col-xs-12">
                             <article class="course-description">
@@ -26,6 +28,7 @@
                             </article>
                         </div>
                     </div>
+
                     <?php if ($currentCourseState) {?>
                         <div class="row">
                             <div class="col-xs-12">
