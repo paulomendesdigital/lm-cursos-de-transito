@@ -22,6 +22,13 @@ class PagesController extends AppController {
             ]
         ]);
 
+        $this->loadModel('Banner');
+        $banners = $this->Banner->find('all',[
+            'conditions' => [
+                'status'=>1
+            ]
+        ]);
+
 
         // ESTADOS*************************************************************************************
         // 3 = Curso de Reciclagem
@@ -83,7 +90,7 @@ class PagesController extends AppController {
 
         // FIM ESTADOS*************************************************************************************
 
-        $this->set(compact('webdoors', 'course', 'states', 'colorStates'));
+        $this->set(compact('webdoors', 'banners', 'course', 'states', 'colorStates'));
 
     	//return $this->redirect(array('controller' => 'meus-cursos' ,'action' => 'index', 'manager' => false));    
 	}

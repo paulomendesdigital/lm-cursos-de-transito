@@ -34,6 +34,9 @@
 			</div>
 		</section>
 	<?php } ?>
+
+	<?php echo !empty($banners) ? $this->Element("site/banner") : ''; ?>
+
 	<section class="reciclagens-buttons">
 		<div class="container">
 			<div class="row">

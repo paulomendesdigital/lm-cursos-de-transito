@@ -1,7 +1,7 @@
 <?php /**
- * @copyright Copyright 2018
- * @author Dayvison Silva - www.lmcursosdetransito.com.br
- * Webdoor View
+ * @copyright Copyright 2017
+ * @author Rafael Bordallo - www.rafaelbordallo.com.br
+ * Banner View
  *
 */ ?>
 <div class="page-header">
@@ -19,11 +19,7 @@
     <div class="header-buttons">
         <div class="collapse" id="header-buttons" style="height: 0px;">
             <div class="well">
-                <?php
-                echo $this->Html->link(__('<i class="icon-plus-circle"></i> Banner'),array('controller' => 'banners', 'action'=>'index'),array('escape'=>false,'class'=>'btn btn-sm btn-success'));
-
-                echo $this->Html->link(__('<i class="icon-plus-circle"></i> Novo Registro'),array('action'=>'add'),array('escape'=>false,'class'=>'btn btn-sm btn-info'));
-                ?>
+                <?php echo $this->Html->link(__('<i class="icon-plus-circle"></i> Novo Registro'),array('action'=>'add'),array('escape'=>false,'class'=>'btn btn-sm btn-info')); ?>
             </div>
         </div>
     </div>
@@ -53,7 +49,6 @@
     </div>
 </div>
 <?php echo $this->Search->end(); ?>
-
 <div class="table-responsive">
     <table cellpadding="0" cellspacing="0" class="table table-striped table-hover table-condensed">
         <thead>
@@ -61,28 +56,26 @@
                 <th><?php echo $this->Paginator->sort('id',__('id', true)); ?></th>
                 <th><?php echo $this->Paginator->sort('name',__('name', true)); ?></th>
                 <th><?php echo $this->Paginator->sort('status',__('status', true)); ?></th>
-                <th><?php echo $this->Paginator->sort('start',__('start', true)); ?></th>
-                <th><?php echo $this->Paginator->sort('finish',__('finish', true)); ?></th>
                 <th><?php echo $this->Paginator->sort('created',__('created', true)); ?></th>
+                <th><?php echo $this->Paginator->sort('modified',__('modified', true)); ?></th>
                 <th class="actions"><?php echo __('Actions'); ?></th>
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($webdoors as $webdoor): ?>
-            	<tr>
-            		<td><?php echo $this->Html->image("/files/webdoor/image/{$webdoor['Webdoor']['id']}/thumb_{$webdoor['Webdoor']['image']}",['class'=>'img-responsive']); ?></td>
-            		<td><?php echo $this->Utility->__LimitText($webdoor['Webdoor']['name']); ?></td>
-            		<td><?php echo $this->Utility->__FormatStatus($webdoor['Webdoor']['status']); ?></td>
-                    <td><?php echo !empty($webdoor['Webdoor']['start']) ? $webdoor['Webdoor']['start'] : ''; ?></td>
-            		<td><?php echo !empty($webdoor['Webdoor']['finish']) ? $webdoor['Webdoor']['finish'] : ''; ?></td>
-            		<td><?php echo $this->Utility->__FormatDate($webdoor['Webdoor']['created']); ?></td>
-            		<td class="actions">
-            			<?php echo $this->Html->link(__('<span class="icon-eye"></span>'), array('action' => 'view', $webdoor['Webdoor']['id']), array('class' => 'btn btn-info btn-xs', 'escape' => false)); ?>
-            			<?php echo $this->Html->link(__('<span class="icon-pencil"></span>'), array('action' => 'edit', $webdoor['Webdoor']['id']), array('class' => 'btn btn-primary btn-xs', 'escape' => false)); ?>
-            			<?php echo $this->Form->postLink(__('<span class="icon-remove3"></span>'), array('action' => 'delete', $webdoor['Webdoor']['id']), array('class' => 'btn btn-danger btn-xs', 'escape' => false), __('Are you sure you want to delete # %s?', $webdoor['Webdoor']['id'])); ?>
-            		</td>
-            	</tr>
-            <?php endforeach; ?>
+            <?php foreach ($banners as $banner): ?>
+	<tr>
+		<td><?php echo h($banner['Banner']['id']); ?></td>
+		<td><?php echo $this->Utility->__LimitText($banner['Banner']['name']); ?></td>
+		<td><?php echo $this->Utility->__FormatStatus($banner['Banner']['status']); ?></td>
+		<td><?php echo $this->Utility->__FormatDate($banner['Banner']['created']); ?></td>
+		<td><?php echo $this->Utility->__FormatDate($banner['Banner']['modified']); ?></td>
+		<td class="actions">
+				<?php echo $this->Html->link(__('<span class="icon-eye"></span>'), array('action' => 'view', $banner['Banner']['id']), array('class' => 'btn btn-info btn-xs', 'escape' => false)); ?>
+			<?php echo $this->Html->link(__('<span class="icon-pencil"></span>'), array('action' => 'edit', $banner['Banner']['id']), array('class' => 'btn btn-primary btn-xs', 'escape' => false)); ?>
+			<?php echo $this->Form->postLink(__('<span class="icon-remove3"></span>'), array('action' => 'delete', $banner['Banner']['id']), array('class' => 'btn btn-danger btn-xs', 'escape' => false), __('Are you sure you want to delete # %s?', $banner['Banner']['id'])); ?>
+		</td>
+	</tr>
+<?php endforeach; ?>
         </tbody>
     </table>
 </div><!-- /table-responsive-->
