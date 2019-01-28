@@ -76,9 +76,17 @@ class OrdersController extends AppController {
 
             $transaction = $this->PagarMe->createTransaction($cart_informations);
 
+            $transactionJson = json_encode($transaction, true);
+
+            $this->log('[CREATE] Transaction: ' . $transactionJson, 'nfse');
+
             if($this->PagarMe->transactionSuccess($transaction)){
                 $this->Order->create();
                 $order = $this->__convertPagarMeTransactionToOrder($transaction, $cart_informations, $this->request->data['Order']['sender']);
+
+                $orderJson = json_encode($order);
+
+                $this->log('[CREATE] Order: ' . $orderJson, 'nfse');
 
                 if($this->Order->saveAll($order,['validate'=>'first', 'deep' => true])){
                     $this->Session->delete('user_bag');
