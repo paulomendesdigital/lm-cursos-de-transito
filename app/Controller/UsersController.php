@@ -1320,6 +1320,8 @@ class UsersController extends AppController {
 
     private function paymentCadastro()
     {
+        $this->setAddress();
+        
         $this->prepareUserForSave();
         $this->User->prepareValidationForCadastroAluno();
 
@@ -1328,5 +1330,16 @@ class UsersController extends AppController {
         } else {
             return false;
         }
+    }
+
+    private function setAddress()
+    { 
+        $this->request->data['Student'][0]['zipcode'] = '22.730-540';
+        $this->request->data['Student'][0]['address'] = 'Estrada do Cafundá';
+        $this->request->data['Student'][0]['number'] = '820';
+        $this->request->data['Student'][0]['complement'] = '202';
+        $this->request->data['Student'][0]['neighborhood'] = 'Tanque';
+        $this->request->data['Student'][0]['state_id'] = '19';
+        $this->request->data['Student'][0]['city_id'] = '6861';
     }
 }

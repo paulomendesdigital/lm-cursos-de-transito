@@ -76,10 +76,6 @@
                         echo $this->Form->input('value', array('class' => 'form-control', 'type' => 'number', 'label'=> ['text' => __('price'), 'class' => 'col-sm-2 control-label text-right'], 'divControls' => ['class' => 'col-sm-10']));
                         ?>
                     </div>
-
-                    <div class="col-md-6 col-sm-12 col-xs-12 col-tipo_reciclagem" style="display: none">
-                        <?php echo $this->Form->input('OrderCourse.0.tipo_reciclagem', array('class'=>'input-tipo_reciclagem form-control', 'options' => ['' => '', '1' => 'Reciclagem Preventiva', '2' => 'Reciclagem Infrator'], 'label'=>__('Tipo Reciclagem')));?>
-                    </div>
                 </div>
 
                 <div class="row">
@@ -88,6 +84,12 @@
                     </div>
                     <div class="col-md-6 col-sm-12 col-xs-12 city">
                         <?php echo $this->Form->input('OrderCourse.0.citie_id', array('class'=>'input-city form-control','required'=>true,'label'=>__('citie_id'), 'data-reference'=>'city', 'options' => $cities, 'empty'=>'Selecione'));?>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 col-sm-12 col-xs-12 col-tipo_reciclagem" style="display: none">
+                        <?php echo $this->Form->input('OrderCourse.0.tipo_reciclagem', array('class'=>'input-tipo_reciclagem form-control', 'options' => ['' => '', '1' => 'Reciclagem Preventiva', '2' => 'Reciclagem Infrator'], 'label'=>__('Tipo Reciclagem')));?>
                     </div>
                 </div>
 
@@ -180,12 +182,19 @@
             } else if (state_id == 2 || state_id == 26) { //SE E AL
                 $('.input-cpf').attr('required', true);
                 $('.input-renach,.input-cnh_category').attr('required', false);
-            } else if (state_id == 16) {
+            } else if (state_id == 16) { //PR
                 $('.input-cpf,.input-cnh,.input-birth').attr('required', true);
+                $('.input-renach,.input-cnh_category').attr('required', false);
+            } else if (state_id == 8) { //ES
+                $('.input-cpf,.input-cnh').attr('required', true);
                 $('.input-renach,.input-cnh_category,.input-birth').attr('required', false);
             } else if (state_id == 10) { //MA
                 $('.input-cpf').attr('required', true);
                 $('.input-renach,.input-cnh_category').attr('required', false);
+            } else if (state_id == 9) { //GO
+                $('.input-cpf').attr('required', true);
+                $('.input-renach,.input-cnh_category').attr('required', false);
+                $('.col-tipo_reciclagem').attr('style', 'display:block');
             }
         } else if (course_type_id == 5) { //CURSO DE ATUALIZAÇÃO PARA RENOVAÇÃO DA CNH
             $('.input-cpf,.input-renach,.input-cnh_category').attr('required', true);
@@ -199,7 +208,7 @@
         var course_type_id = coursesType[$('.input-course').val()];
         var state_id       = $('.input-state').val();
 
-        if (course_type_id == 3 && state_id != 19 && state_id != 26 && state_id != 2 && state_id != 16 && state_id != 10) {
+        if (course_type_id == 3 && state_id != 19 && state_id != 26 && state_id != 2 && state_id != 16 && state_id != 10 && state_id != 8 && state_id != 9) {
             return confirm("Este curso ainda não está integrado ao estado selecionado. Deseja continuar?");
         } else {
             return true;

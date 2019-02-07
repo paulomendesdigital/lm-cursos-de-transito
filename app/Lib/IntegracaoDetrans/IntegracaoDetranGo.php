@@ -13,9 +13,10 @@ class IntegracaoDetranGo extends IntegracaoBase
 {
     //**************************************************************************************************************************** */
     //HOMOLOGAÇÃO
-    // const URL_WEBSERVICE_TOKEN          = 'https://servicoshomolog.detran.go.gov.br/token';
-    // const URL_WEBSERVICE_CONSULTA       = 'https://servicoshomolog.detran.go.gov.br/gtih/ws/rest/reciclagem/v1.0.0/get/permite/';
-    // const URL_WEBSERVICE_CERTIFICADO    = 'https://servicoshomolog.detran.go.gov.br/gtih/ws/rest/reciclagem/v1.0.0/post/enviaCurso';
+    // const URL_WEBSERVICE_TOKEN              = 'https://servicoshomolog.detran.go.gov.br/token';
+    // const URL_WEBSERVICE_CONSULTA           = 'https://servicoshomolog.detran.go.gov.br/gtih/ws/rest/reciclagem/v1.0.0/get/permite/';
+    // const URL_WEBSERVICE_CERTIFICADO        = 'https://servicoshomolog.detran.go.gov.br/gtih/ws/rest/reciclagem/v1.0.0/post/enviaCurso';
+    // const URL_WEBSERVICE_VERIFICA_CERTIFICADO  = 'https://servicoshomolog.detran.go.gov.br/gtih/ws/rest/reciclagem/v1.0.0/get/certificado/';
 
     // const CLIENT_KEY    = 'eGCTqJsaQjOrw__3lboqh3s3go8a';
     // const CLIENT_SECRET = 'oSlI3FUOeelzy8QBCgIrbKx5eeoa';
@@ -27,9 +28,10 @@ class IntegracaoDetranGo extends IntegracaoBase
 
     //**************************************************************************************************************************** */
     //PRODUÇÃO
-    const URL_WEBSERVICE_TOKEN          = 'https://services.detran.go.gov.br/token';
-    const URL_WEBSERVICE_CONSULTA       = 'https://services.detran.go.gov.br/gtih/reciclagem/v1.0.0/get/permite/';
-    const URL_WEBSERVICE_CERTIFICADO    = 'https://services.detran.go.gov.br/gtih/reciclagem/v1.0.0/post/enviaCurso/';
+    const URL_WEBSERVICE_TOKEN               = 'https://services.detran.go.gov.br/token';
+    const URL_WEBSERVICE_CONSULTA            = 'https://services.detran.go.gov.br/gtih/reciclagem/v1.0.0/get/permite/';
+    const URL_WEBSERVICE_CERTIFICADO         = 'https://services.detran.go.gov.br/gtih/reciclagem/v1.0.0/post/enviaCurso/';
+    const URL_WEBSERVICE_PRINT_CERTIFICADO   = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX';
 
     const CLIENT_KEY    = 'qhzq7hYsP9ZEfjfMm0AZ7n1tzRYa';
     const CLIENT_SECRET = 'DDKivA0xbm4VeBXHSK9jrilurCga';
@@ -42,6 +44,7 @@ class IntegracaoDetranGo extends IntegracaoBase
 
     const OPERACAO_CONSULTA    = 1;
     const OPERACAO_CERTIFICADO = 2;
+    const OPERACAO_VERIFICA_CERTIFICADO = 3;
 
     const MSG_ERRO_DETRAN = 'No momento não foi possível consultar o DETRAN-GO';
 
@@ -175,6 +178,36 @@ class IntegracaoDetranGo extends IntegracaoBase
     }
 
     /**
+     * Envia o Sinal de Conclusão do Curso no Órgão de Trânsito
+     * @param IntegracaoParams $objParams
+     * @return boolean
+     * @throws Exception
+     */
+    public function verificarCertificado(IntegracaoParams $objParams)
+    {
+        $this->createLog('verificar', ['parametros' => $objParams]);
+
+        try {
+            $this->prepareParamsCertificado($objParams);
+
+            $token = $this->getDynamicToken();
+
+            $arrReturn = $this->client(self::OPERACAO_VERIFICA_CERTIFICADO, $token, $objParams);
+            $this->createRetorno($arrReturn[0], $arrReturn[1]);
+
+            return ($arrReturn[0] === '020'); //Processamento OK
+
+        } catch (IntegracaoException $ex) {
+            $this->createRetorno(null, $ex->getMessage());
+            throw $ex;
+
+        } catch (Exception $ex) {
+            $this->createRetorno(null, $ex->getMessage());
+            throw new Exception(self::MSG_ERRO_DETRAN, 0, $ex);
+        }
+    }
+
+    /**
      * @return string
      * @throws Exception
      */
@@ -267,6 +300,27 @@ class IntegracaoDetranGo extends IntegracaoBase
                 curl_setopt($handle, CURLOPT_TIMEOUT, 20);
                 curl_setopt($handle, CURLOPT_POST, 1);
                 curl_setopt($handle, CURLOPT_POSTFIELDS, $strXmlBody);
+                curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($handle, CURLOPT_SSL_VERIFYHOST,false);
+                curl_setopt($handle, CURLOPT_SSL_VERIFYPEER,false);
+                $return = curl_exec($handle);
+                curl_close($handle);
+
+                if (!$return) {
+                    throw new IntegracaoException(self::MSG_ERRO_DETRAN);
+                }
+
+                break;
+
+            case self::OPERACAO_VERIFICA_CERTIFICADO:
+                $strUrl = self::URL_WEBSERVICE_VERIFICA_CERTIFICADO . $objParams->cnh . '/' . self::CNPJ_CFC;
+
+                $handle = curl_init($strUrl);
+
+                curl_setopt($handle, CURLOPT_HTTPHEADER, ['Content-type: text/xml', 'Authorization: Bearer ' . $token]);
+                
+                curl_setopt($handle, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+                curl_setopt($handle, CURLOPT_TIMEOUT, 20);
                 curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
                 curl_setopt($handle, CURLOPT_SSL_VERIFYHOST,false);
                 curl_setopt($handle, CURLOPT_SSL_VERIFYPEER,false);

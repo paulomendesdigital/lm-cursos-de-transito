@@ -152,6 +152,20 @@ class UserCertificate extends AppModel {
         }
 	}
 
+	public function __checkCertificate($order_id, $course_id)
+	{
+        App::uses('IntegracaoDetransService', 'IntegracaoDetrans');
+
+		$objIntegracaoService = new IntegracaoDetransService();
+		
+		try {
+			$result = $objIntegracaoService->verificarCertificado($order_id, $course_id);
+			return $result;
+		} catch (Exception $ex) {
+			return $ex;
+		}
+	}
+
     public function integracaoCertificado($orderId, $courseId)
     {
         App::uses('IntegracaoDetransService', 'IntegracaoDetrans');

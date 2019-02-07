@@ -260,6 +260,47 @@ class IntegracaoDetransService
         return true;
     }
 
+    public function verificarCertificado($orderId, $courseId)
+    {
+        $arrMatricula   = $this->getDadosMatricula($orderId, $courseId);
+        $arrOrderCourse = &$arrMatricula['OrderCourse'];
+
+        $objIntegracao = $this->getIntegracao($arrMatricula['Course'], $arrOrderCourse['state_id'], $arrOrderCourse['citie_id']);
+
+        if ($objIntegracao) {
+
+            //deve estar Concluído processar
+            if ($arrOrderCourse['status_detran_id'] == StatusDetran::CONCLUIDO) {
+
+                $bolSave = false;
+                try {
+                    $arrCertificado = $this->getCertificado($orderId, $courseId);
+
+                    //só faz a comunicação da conclusão enviou todos os créditos de aula e tem certificado
+                    if ($this->creditar($orderId, $courseId, $arrMatricula) && $arrCertificado) {
+                        $bolSave = true;
+
+                        if ($objIntegracao->verificarCertificado(IntegracaoParams::createFromArray(array_merge($arrMatricula, $arrCertificado)))) {
+                            return true;
+                        } else {
+                            $arrOrderCourse['retry_count_detran']++; //tentará novamente pelo cron
+                            return false;
+                        }
+
+                    }
+
+                } catch (Exception $ex) {
+                    $arrOrderCourse['retry_count_detran']++;
+                    $bolSave = true;
+                    throw $ex;
+                }
+            }
+        }
+
+        $this->retorno = new IntegracaoRetorno('OK', 'Curso não é integrado');
+        return true;
+    }
+
 
     /**
      * Envia o Crédito de Aula para o Órgão de Trânsito
@@ -281,7 +322,7 @@ class IntegracaoDetransService
         if ($objIntegracao) {
 
             //só faz a comunicação de crédito de aula se estiver com status de Matriculado ou Aguardando Conclusão
-            if ($arrOrderCourse['status_detran_id'] == StatusDetran::MATRICULADO || $arrOrderCourse['status_detran_id'] == StatusDetran::AGUARDANDO_CONCLUSAO) {
+            if ($arrOrderCourse['status_detran_id'] == StatusDetran::MATRICULADO || $arrOrderCourse['status_detran_id'] == StatusDetran::AGUARDANDO_CONCLUSAO || $arrOrderCourse['status_detran_id'] == StatusDetran::CONCLUIDO) {
 
                 //CURSOS SERGIPE TEM CREDITO DE HORAS
                 if ($arrOrderCourse['state_id'] == State::SERGIPE) {

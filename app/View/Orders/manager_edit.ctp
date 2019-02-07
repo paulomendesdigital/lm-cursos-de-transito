@@ -38,10 +38,11 @@
                 <div class="row">
                     <div class="col-md-4"><h6>Curso</h6></div>
                     <div class="col-md-1"><h6>Estados</h6></div>
-                    <div class="col-md-2"><h6>Cidades</h6></div>
+                    <div class="col-md-1"><h6>Cidades</h6></div>
                     <div class="col-md-2"><h6>Renach</h6></div>
+                    <div class="col-md-2"><h6>Tipo Reciclagem</h6></div>
                     <div class="col-md-1"><h6>Categoria</h6></div>
-                    <div class="col-md-2"><h6>Valor</h6></div>
+                    <div class="col-md-1"><h6>Valor</h6></div>
                 </div>
 
                 <div data-toggle="courses">
@@ -52,18 +53,22 @@
                                     <div class="col-md-4">
                                         <?php echo $this->Form->input('OrderCourse.'.$key.'.id', array('class' => 'form-control', 'data-mask' => 'id', 'label'=>false)); ?>
                                         <a onclick="removeOrderCourse(<?php echo $key;?>)" class="btn btn-link btn-icon btn-xs pull-left" title="Remover curso <?php echo $key;?>"><i class="icon-remove3 text-danger"></i></a>
-                                        <?php echo $this->Form->input('OrderCourse.'.$key.'.course_id', array('type' => 'select','class' => 'form-control', 'label'=> false, 'options' => $courses, 'data-reference' => 'course')); ?>
+                                        <?php echo $this->Form->input('OrderCourse.'.$key.'.course_id', array('type' => 'select','class' => 'input-course form-control', 'label'=> false, 'options' => $courses, 'data-reference' => 'course')); ?>
                                     </div>
                                     
                                     <div class="col-md-1"><?php echo $this->Form->input('OrderCourse.'.$key.'.state_id', array('class' => 'form-control', 'data-mask' => 'module_id', 'label'=>false, 'div' => false, 'empty' => 'Selecione', 'data-reference' => 'state', 'onchange' => 'stateChange(this, \'OrderCourse\', '.$key.')')); ?></div>
                                     
-                                    <div class="col-md-2"><?php echo $this->Form->input('OrderCourse.'.$key.'.citie_id', array('class' => 'form-control', 'data-mask' => 'module_id', 'label'=>false, 'div' => false, 'options' => isset($OrderCourse['Citie']['id']) ? [$OrderCourse['Citie']['id'] => $OrderCourse['Citie']['name']]  : [] )); ?></div>
+                                    <div class="col-md-1"><?php echo $this->Form->input('OrderCourse.'.$key.'.citie_id', array('class' => 'form-control', 'data-mask' => 'module_id', 'label'=>false, 'div' => false, 'options' => isset($OrderCourse['Citie']['id']) ? [$OrderCourse['Citie']['id'] => $OrderCourse['Citie']['name']]  : [] )); ?></div>
                                     
                                     <div class="col-md-2"><?php echo $this->Form->input('OrderCourse.'.$key.'.renach', array('class' => 'form-control', 'label'=>false, 'div' => false)); ?></div>
+
+                                    <div class="col-md-2 col-tipo_reciclagem">
+                                        <?php echo $this->Form->input('OrderCourse.'.$key.'.tipo_reciclagem', array('class'=>'input-tipo_reciclagem form-control', 'label' => false, 'div' => false, 'options' => ['' => '', '1' => 'Reciclagem Preventiva', '2' => 'Reciclagem Infrator']));?>
+                                    </div>
                                     
                                     <div class="col-md-1"><?php echo $this->Form->input('OrderCourse.'.$key.'.cnh_category', array('class' => 'form-control', 'label'=>false, 'div' => false, 'options' => $cnhCategories)); ?></div>
                                     
-                                    <div class="col-md-2"><?php echo $this->Form->input('Order.value', array('class' => 'form-control', 'label'=>false, 'div' => false)); ?></div>
+                                    <div class="col-md-1"><?php echo $this->Form->input('Order.value', array('class' => 'form-control', 'label'=>false, 'div' => false)); ?></div>
                                 </div>
                              </div>
                         </div>
@@ -84,3 +89,16 @@
 
 
 <?php echo $this->Form->end(); ?>
+
+<script>
+    $('.input-course,.input-state').on('change', function () {
+        var course_type_id = coursesType[$('.input-course').val()];
+        var state_id       = $('.input-state').val();
+
+        if (course_type_id == 3) { //CURSO DE RECICLAGEM
+            if (state_id == 9) { //GO
+                $('.col-tipo_reciclagem').attr('style', 'display:block');
+            }
+        }
+    });
+</script>

@@ -547,7 +547,7 @@ class VirtualRoomsController extends AppController {
     	}
 
     	$this->loadModel('UserCertificate');
-    	$UserCertificate = $this->UserCertificate->__getCertificate($order_id, $user_id, $course_id);
+		$UserCertificate = $this->UserCertificate->__getCertificate($order_id, $user_id, $course_id);
 
     	$conditionsModuleCourse = $this->__getConditionsForScope($course_id, $course['CourseType']['scope'], $state_id, $citie_id);
 		
@@ -573,7 +573,15 @@ class VirtualRoomsController extends AppController {
 	    //recarrega UserCertificate
 		$UserCertificate = $this->UserCertificate->__getCertificate($order_id, $user_id, $course_id);
 
-	    $this->__printCertificate( $order_id,  $UserCertificate);
+		if ($state_id == '9') {
+			if (!$this->UserCertificate->__checkCertificate($order_id, $course_id)) {
+				$this->render('make_proof');
+			} else {
+				$this->__printCertificate( $order_id,  $UserCertificate);
+			}
+		} else {
+			$this->__printCertificate( $order_id,  $UserCertificate);
+		}
 	}
 
 	private function __printCertificate($order_id, $UserCertificate){
