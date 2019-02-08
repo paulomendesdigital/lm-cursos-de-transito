@@ -46,6 +46,16 @@ class OrdersController extends AppController {
             $this->set('userValid', $userValid);
         }
 
+        if (empty($user['Student'][0])) {
+            $student = $user['Student'];
+            unset($user['Student']);
+
+            $user['User']['Student'][0] = $student;
+            $user['User']['Student'][0]['City'] = $user['City'];
+            $user['User']['Student'][0]['State'] = $user['State'];
+        }
+        
+
         $subtotal = $discount = 0;
         foreach ($carts as $cart) {
             $subtotal += $cart['Cart']['unitary_value'];
@@ -69,6 +79,7 @@ class OrdersController extends AppController {
         }
 
         if($this->request->is('post')){
+            
             $this->loadModel('Group');
             $this->__verifySecurity($this->Group->getAluno());
 
@@ -84,11 +95,18 @@ class OrdersController extends AppController {
                 $this->Order->create();
                 $order = $this->__convertPagarMeTransactionToOrder($transaction, $cart_informations, $this->request->data['Order']['sender']);
 
+                $orderNfse = $order;
+                $orderNfse['User'] = $user['User'];
+                $orderNfse['OrderCourse'][0]['Course'] = $carts[0]['Course'];
+
                 $orderJson = json_encode($order);
 
                 $this->log('[CREATE] Order: ' . $orderJson, 'nfse');
 
                 if($this->Order->saveAll($order,['validate'=>'first', 'deep' => true])){
+
+                    $this->createNfse($orderNfse, $transaction['status']);
+
                     $this->Session->delete('user_bag');
                     $this->Session->delete('Ticket');
                     return $this->redirect(['action'=>'success','prefixes'=>false,$this->Order->id]);
@@ -336,7 +354,7 @@ class OrdersController extends AppController {
                 
         $statusPaid = $this->Order->Payment->getStatusByText('Aprovado');
 
-        if ($order['Order']['order_type_id'] != $postbackStatus && $postbackStatus == $statusPaid) {
+        if ($postbackStatus == $statusPaid) {
 
             $services = $order['OrderCourse'];
 
