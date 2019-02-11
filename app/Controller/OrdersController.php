@@ -350,11 +350,19 @@ class OrdersController extends AppController {
 
     private function createNfse($order, $postBackCurrentStatus) {
 
+        $this->log('postBackCurrentStatus: ' . $postBackCurrentStatus, 'nfse');
+
         $postbackStatus = $this->Order->Payment->getStatusByPagarmeStatus($postBackCurrentStatus);
+
+        $this->log('postbackStatus: ' . $postbackStatus, 'nfse');
                 
         $statusPaid = $this->Order->Payment->getStatusByText('Aprovado');
 
+        $this->log('statusPaid: ' . $statusPaid, 'nfse');
+
         if ($postbackStatus == $statusPaid) {
+
+            $this->log('TRANSAÇÃO PAGA.', 'nfse');
 
             $services = $order['OrderCourse'];
 
