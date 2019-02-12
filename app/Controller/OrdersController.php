@@ -46,7 +46,7 @@ class OrdersController extends AppController {
             $this->set('userValid', $userValid);
         }
 
-        if (empty($user['Student'][0])) {
+        if (empty($user['Student'][0]) && !empty($user['Student']) && !empty($user['City']) && !empty($user['State'])) {
             $student = $user['Student'];
             unset($user['Student']);
 
